@@ -1,4 +1,4 @@
-package service;
+package com.duyngoc.service;
 
 import org.springframework.data.repository.CrudRepository;
 

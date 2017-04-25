@@ -1,4 +1,4 @@
-package service;
+package com.duyngoc.service;
 
 import com.duyngoc.repository.ApartmentRepository;
 

@@ -1,11 +1,16 @@
 package com.duyngoc.model;
 
-import java.time.Year;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -15,9 +20,65 @@ public class Apartment {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String street;
+	
+	
+	@OneToMany(cascade = CascadeType.ALL,mappedBy = "apartment",fetch = FetchType.EAGER)
+	private List<ImageUrl> image;
+	
+
+	public List<ImageUrl> getImage() {
+		return image;
+	}
+	
+	public void setImage(List<ImageUrl> image) {
+		this.image = image;
+	}
 	private String city;
 	private double price;
-	
+	private String apartemntid;
+	private String longitude;
+	private String latitude;
+	private boolean available;
+	public String getApartemntid() {
+		return apartemntid;
+	}
+
+	public void setApartemntid(String apartemntid) {
+		this.apartemntid = apartemntid;
+	}
+
+	public String getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
+
+	public String getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+
+	public boolean isAvailable() {
+		return available;
+	}
+
+	public void setAvailable(boolean avaialble) {
+		this.available = avaialble;
+	}
+
+	public String getProcess() {
+		return process;
+	}
+
+	public void setProcess(String process) {
+		this.process = process;
+	}
+	private String process;
 	
 	private String rooms;
 	
@@ -46,7 +107,7 @@ public class Apartment {
 		this.lotSizeSqFt=lotSizeSqft;
 		this.yearBuilt=yearBuilt;
 		this.yearUpdated=yearUpdated;
-		this.numFloors=numFloors;
+		this.numFloors=floors;
 	}
 	
 	public Long getId() {

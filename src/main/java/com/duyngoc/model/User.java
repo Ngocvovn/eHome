@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 @Entity
-@Table(name="user")
+@Table(name="customer")
 
 public class User {
 	@Id
@@ -16,6 +16,19 @@ public class User {
 	private String username;
 	private String password;
 	private Boolean enabled;
+	private String role;
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public void setAvatarUrl(String avatarUrl) {
+		this.avatarUrl = avatarUrl;
+	}
 
 	public User() {
 	}

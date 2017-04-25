@@ -62,6 +62,8 @@ public class ImageUrl {
 
 	public void setApartment(Apartment apartment) {
 		this.apartment = apartment;
-	};
+	}
+
 
 }
+

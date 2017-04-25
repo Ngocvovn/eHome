@@ -35,16 +35,24 @@ public class Apartment {
 	}
 	private String city;
 	private double price;
-	private String apartemntid;
+	private String apartmentid;
 	private String longitude;
-	private String latitude;
-	private boolean available;
-	public String getApartemntid() {
-		return apartemntid;
+	private boolean approved;
+	public boolean isApproved() {
+		return approved;
 	}
 
-	public void setApartemntid(String apartemntid) {
-		this.apartemntid = apartemntid;
+	public void setApproved(boolean approved) {
+		this.approved = approved;
+	}
+	private String latitude;
+	private boolean available;
+	public String getApartmentid() {
+		return apartmentid;
+	}
+
+	public void setApartmentid(String apartemntid) {
+		this.apartmentid = apartemntid;
 	}
 
 	public String getLongitude() {

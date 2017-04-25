@@ -22,13 +22,13 @@ public class ImageUrl {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String url;
-	private Long aparmentid;
+	private String aparmentid;
 	
-	public Long getAparmentid() {
+	public String getAparmentid() {
 		return aparmentid;
 	}
 
-	public void setAparmentid(Long aparmentid) {
+	public void setAparmentid(String aparmentid) {
 		this.aparmentid = aparmentid;
 	}
 

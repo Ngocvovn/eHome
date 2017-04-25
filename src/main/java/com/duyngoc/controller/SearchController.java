@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.duyngoc.model.Apartment;
 import com.duyngoc.repository.ApartmentRepository;
-import com.duyngoc.repository.ImageUrlRepostiory;
 
 @RestController
 @RequestMapping("api/search")

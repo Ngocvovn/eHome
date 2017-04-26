@@ -34,10 +34,10 @@ public class Security extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 
 		http.httpBasic().and().authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-		.antMatchers("/search/**").permitAll()
+		.antMatchers("/api/search/**").permitAll()
 		.antMatchers("/api/user").permitAll()
-		.antMatchers("/api/employee").access("hasRole('EMPLOYEE')||hasRole('ADMIN')")
-		.antMatchers("/api/**").access("hasRole('ADMIN')")
+		//.antMatchers("/api/employee").access("hasRole('EMPLOYEE')||hasRole('ADMIN')")
+		//.antMatchers("/api/**").access("hasRole('ADMIN')")
 		
 		.antMatchers("/login","/api.employee/**").authenticated()
 		
@@ -45,9 +45,10 @@ public class Security extends WebSecurityConfigurerAdapter {
         .logoutUrl("/logout")
         .clearAuthentication(true)
         .invalidateHttpSession( true )
+        .deleteCookies("JSESSIONID").permitAll()
         .logoutSuccessUrl("/")
      
-        .deleteCookies("JSESSIONID").permitAll()
+        
        .and().csrf().disable()
 		;
 		

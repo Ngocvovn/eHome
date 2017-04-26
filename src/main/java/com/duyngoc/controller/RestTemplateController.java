@@ -1,4 +1,4 @@
-package com.duyngoc.controller;
+/*package com.duyngoc.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -70,6 +70,7 @@ public class RestTemplateController {
 		apartment.setApartmentid(json);
 		apartment.setCity(city);
 		apartment.setStreet(street);
+		apartment.setOwner("eHome");
 		getApartment(apartment,json);
 		return json;
 	}
@@ -172,6 +173,7 @@ public class RestTemplateController {
 			}
 		}
 		if(save){
+			apartment.setAvailable(true);
 			apartRepo.save(apartment);
 		}
 	
@@ -196,3 +198,4 @@ public class RestTemplateController {
 		return new ResponseEntity<Student>(student, HttpStatus.OK);
 	}
 }
+*/

@@ -15,7 +15,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="apartment")
-public class Apartment {
+public class Apartment implements Comparable<Apartment> {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -34,7 +34,15 @@ public class Apartment {
 		this.image = image;
 	}
 	private String city;
+	private String owner;
 	private double price;
+	public String getOwner() {
+		return owner;
+	}
+
+	public void setOwner(String owner) {
+		this.owner = owner;
+	}
 	private String apartmentid;
 	private String longitude;
 	private boolean approved;
@@ -105,7 +113,7 @@ public class Apartment {
 		
 	}
 	
-	public Apartment(String street, String city, double price, String rooms, String bedrooms, String finishedSqft, String lotSizeSqft,String yearBuilt, String yearUpdated, String floors){
+	public Apartment(String apartmentid, Boolean approved, String owner,String process,String bathrooms,String view,String parkingType, String longitude,String latitude, String heatingSourcesGas, String street, String city, double price, String rooms, String bedrooms, String finishedSqft, String lotSizeSqft,String yearBuilt, String yearUpdated, String floors){
 		this.street=street;
 		this.city=city;
 		this.price=price;
@@ -116,6 +124,16 @@ public class Apartment {
 		this.yearBuilt=yearBuilt;
 		this.yearUpdated=yearUpdated;
 		this.numFloors=floors;
+		this.owner=owner;
+		this.bathrooms=bathrooms;
+		this.process=process;
+		this.view=view;
+		this.parkingType=parkingType;
+		this.heatingSourcesGas=heatingSourcesGas;
+		this.longitude=longitude;
+		this.latitude=latitude;
+		this.apartmentid=apartmentid;
+		this.approved=approved;
 	}
 	
 	public Long getId() {
@@ -211,6 +229,13 @@ public class Apartment {
 	private String view;
 	private String parkingType;
 	private String heatingSourcesGas;
+
+
+	@Override
+	public int compareTo(Apartment o) {
+		// TODO Auto-generated method stub
+		return 1;
+	}
 
 	
 	

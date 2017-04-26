@@ -1,4 +1,4 @@
-/*package com.duyngoc.configuration;
+package com.duyngoc.configuration;
 
 import org.springframework.stereotype.Component;
 
@@ -32,4 +32,3 @@ public class CorsFilter implements Filter {
     public void destroy() {}
 
 }
-*/

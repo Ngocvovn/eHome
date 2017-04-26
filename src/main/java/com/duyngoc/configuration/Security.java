@@ -1,4 +1,4 @@
-/*package com.duyngoc.configuration;
+package com.duyngoc.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -9,7 +9,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-import service.UserDetailsServices;
+import com.duyngoc.service.UserDetailsServices;
+
+
 
 
 
@@ -31,37 +33,24 @@ public class Security extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		
-		 * http.httpBasic().and().authorizeRequests()
-		 * .antMatchers("/**").permitAll()
-		 * .antMatchers("/manager/").access("hasRole('USER')").anyRequest().
-		 * authenticated();
-		 
-
-		
-		 * http .httpBasic().and() .authorizeRequests()
-		 * .antMatchers("/index.html", "/home.html", "/login.html",
-		 * "/").permitAll() .anyRequest().authenticated() .and() .csrf()
-		 * .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
-		 
-
 		http.httpBasic().and().authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-		//.antMatchers("/api.employee/**").access("hasRole('USER')")
 		.antMatchers("/search/**").permitAll()
-		.antMatchers("/api.manager/**").access("hasRole('ADMIN')")
+		.antMatchers("/api/user").permitAll()
+		.antMatchers("/api/employee").access("hasRole('EMPLOYEE')||hasRole('ADMIN')")
+		.antMatchers("/api/**").access("hasRole('ADMIN')")
+		
 		.antMatchers("/login","/api.employee/**").authenticated()
-	
-		.and().httpBasic()  
-				antMatchers("/manager/**").access("hasRole('USER')")
-				.antMatchers("/api/login").access("hasRole('USER')")
-				.antMatchers("/**").permitAll();
-
-		// .antMatchers("/db/**").access("hasRole('ADMIN') and hasRole('DBA')")
-		// .and().logout().logoutRequestMatcher(new
-		// AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login");;
-
-		.and().csrf().disable();
+		
+		.and().logout()
+        .logoutUrl("/logout")
+        .clearAuthentication(true)
+        .invalidateHttpSession( true )
+        .logoutSuccessUrl("/")
+     
+        .deleteCookies("JSESSIONID").permitAll()
+       .and().csrf().disable()
+		;
+		
 	}
 
 }
-*/

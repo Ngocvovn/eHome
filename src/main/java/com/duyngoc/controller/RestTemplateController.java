@@ -1,4 +1,4 @@
-/*package com.duyngoc.controller;
+package com.duyngoc.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -19,10 +19,10 @@ import com.duyngoc.model.Student;
 import com.duyngoc.repository.ApartmentRepository;
 import com.duyngoc.repository.ImageUrlRepostiory;
 import com.duyngoc.repository.StudentRepository;
-import com.fasterxml.jackson.core.JsonProcessingException;
+/*import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;*/
 
 @RestController
 @RequestMapping("/ehome")
@@ -38,7 +38,7 @@ public class RestTemplateController {
 	
 	@Autowired
 	private ImageUrlRepostiory imageRepo;
-	public String convertToJson(String xml) throws JsonProcessingException, IOException{
+	/*public String convertToJson(String xml) throws JsonProcessingException, IOException{
 		ObjectMapper xmlMapper = new XmlMapper();
 		JsonNode node = xmlMapper.readTree(xml.getBytes());
 
@@ -67,7 +67,7 @@ public class RestTemplateController {
 			}
 		}
 		System.out.println(json);
-		apartment.setApartmentid(json);
+		apartment.setApartmentId(json);
 		apartment.setCity(city);
 		apartment.setStreet(street);
 		apartment.setOwner("eHome");
@@ -169,7 +169,7 @@ public class RestTemplateController {
 			
 			else if (split[i].equals("<view")) {
 				System.out.println(split[i] + split[i + 1] + split[i + 2]);
-				apartment.setView(split[i+1].split("<")[0]);
+				apartment.setViewPoint(split[i+1].split("<")[0]);
 			}
 		}
 		if(save){
@@ -178,7 +178,7 @@ public class RestTemplateController {
 		}
 	
 		return apartment;
-	}
+	}*/
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ResponseEntity<List<Student>> home() {
@@ -198,4 +198,3 @@ public class RestTemplateController {
 		return new ResponseEntity<Student>(student, HttpStatus.OK);
 	}
 }
-*/

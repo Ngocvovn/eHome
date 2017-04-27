@@ -26,14 +26,14 @@ public class UserController {
 		try {
 			System.out.println(user.getName());
 			if(userRepo.findByUsername(user.getUsername())!=null && user.getId()==MAX){
-				return new ResponseEntity<String>("Username has existed", HttpStatus.NOT_ACCEPTABLE);
+				return new ResponseEntity<Exception>(new IllegalArgumentException(), HttpStatus.NOT_ACCEPTABLE);
 			}
 			user.setRole("ROLE_USER");
 			userRepo.save(user);
 			return new ResponseEntity<User>(user, HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO: handle exception
-			return new ResponseEntity<String>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<Exception>(e,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	

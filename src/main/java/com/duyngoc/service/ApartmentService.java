@@ -25,7 +25,7 @@ public class ApartmentService {
 
 		TreeSet<Apartment> apartments = new TreeSet<>();
 		if (city.equals("all") && street.equals("all")) {
-			apartments= (TreeSet<Apartment>) aparmentRepository.findAll();
+			apartments.addAll((Collection<? extends Apartment>) aparmentRepository.findAll());
 
 		} else if (street.equals("all")) {
 			System.out.println("card");
@@ -65,7 +65,7 @@ public class ApartmentService {
 		
 		while(iterator.hasNext()){
 			Apartment apartment = iterator.next();
-			apartment.setImage(imageRepository.findByAparmentid(apartment.getApartmentid()));
+			apartment.setImageUrls(imageRepository.findByAparmentid(apartment.getApartmentId()));
 		}
 	}
 	
@@ -75,8 +75,9 @@ public class ApartmentService {
 		return apartments;
 	}
 	
-	public void save(Apartment apartment){
-		aparmentRepository.save(apartment);
+	public Apartment save(Apartment apartment){
+		System.out.println("ngoc");
+		return aparmentRepository.save(apartment);
 	}
 
 }

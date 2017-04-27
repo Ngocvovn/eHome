@@ -26,6 +26,8 @@ public class ApartmentController {
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public ResponseEntity<?> addAparrtment(@RequestBody Apartment apartment) {
 		try{
+			
+			System.out.println(apartment.getStreet()+"  "+apartment.getId());
 			service.save(apartment);
 			return new ResponseEntity<Apartment>(apartment, HttpStatus.OK);
 		}

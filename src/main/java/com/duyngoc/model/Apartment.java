@@ -1,6 +1,7 @@
 package com.duyngoc.model;
 
 
+
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -9,43 +10,66 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="apartment")
 public class Apartment implements Comparable<Apartment> {
+	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String street;
-	
-	
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "apartment",fetch = FetchType.EAGER)
-	private List<ImageUrl> image;
-	
-
-	public List<ImageUrl> getImage() {
-		return image;
-	}
-	
-	public void setImage(List<ImageUrl> image) {
-		this.image = image;
-	}
+	private List<ImageUrl> imageUrls;
 	private String city;
 	private String owner;
 	private double price;
-	public String getOwner() {
-		return owner;
-	}
-
-	public void setOwner(String owner) {
-		this.owner = owner;
-	}
-	private String apartmentid;
+	private String apartmentId;
 	private String longitude;
 	private boolean approved;
+	private String latitude;
+	private boolean available;
+	private String bedrooms;
+	private String bathrooms;
+	private String finishedSqFt;
+	private String lotSizeSqFt;
+	private String yearBuilt;
+	private String yearUpdated;
+	private String numFloors;
+	private String process;
+	private String rooms;
+	private String viewPoint;
+	private String parkingType;
+	private String heatingSourcesGas;
+	public Apartment(){
+		
+	}
+	
+/*	public Apartment(String apartmentid, Boolean approved, String owner,String process,String bathrooms,String view,String parkingType, String longitude,String latitude, String heatingSourcesGas, String street, String city, double price, String rooms, String bedrooms, String finishedSqft, String lotSizeSqft,String yearBuilt, String yearUpdated, String floors){
+		this.street=street;
+		this.city=city;
+		this.price=price;
+		this.rooms=rooms;
+		this.bedrooms=bedrooms;
+		this.finishedSqFt=finishedSqft;
+		this.lotSizeSqFt=lotSizeSqft;
+		this.yearBuilt=yearBuilt;
+		this.yearUpdated=yearUpdated;
+		this.numFloors=floors;
+		this.owner=owner;
+		this.bathrooms=bathrooms;
+		this.process=process;
+		this.view=view;
+		this.parkingType=parkingType;
+		this.heatingSourcesGas=heatingSourcesGas;
+		this.longitude=longitude;
+		this.latitude=latitude;
+		this.apartmentid=apartmentid;
+		this.approved=approved;
+	}*/
 	public boolean isApproved() {
 		return approved;
 	}
@@ -53,15 +77,7 @@ public class Apartment implements Comparable<Apartment> {
 	public void setApproved(boolean approved) {
 		this.approved = approved;
 	}
-	private String latitude;
-	private boolean available;
-	public String getApartmentid() {
-		return apartmentid;
-	}
-
-	public void setApartmentid(String apartemntid) {
-		this.apartmentid = apartemntid;
-	}
+	
 
 	public String getLongitude() {
 		return longitude;
@@ -94,46 +110,21 @@ public class Apartment implements Comparable<Apartment> {
 	public void setProcess(String process) {
 		this.process = process;
 	}
-	private String process;
-	
-	private String rooms;
-	
-	
-	private String bedrooms;
-	private String bathrooms;
-	private String finishedSqFt;
-	private String lotSizeSqFt;
-	private String yearBuilt;
-	private String yearUpdated;
-	private String numFloors;
-	
-	
-	
-	public Apartment(){
-		
+
+
+
+	@Override
+	public int compareTo(Apartment o) {
+		// TODO Auto-generated method stub
+		return 1;
 	}
-	
-	public Apartment(String apartmentid, Boolean approved, String owner,String process,String bathrooms,String view,String parkingType, String longitude,String latitude, String heatingSourcesGas, String street, String city, double price, String rooms, String bedrooms, String finishedSqft, String lotSizeSqft,String yearBuilt, String yearUpdated, String floors){
-		this.street=street;
-		this.city=city;
-		this.price=price;
-		this.rooms=rooms;
-		this.bedrooms=bedrooms;
-		this.finishedSqFt=finishedSqft;
-		this.lotSizeSqFt=lotSizeSqft;
-		this.yearBuilt=yearBuilt;
-		this.yearUpdated=yearUpdated;
-		this.numFloors=floors;
-		this.owner=owner;
-		this.bathrooms=bathrooms;
-		this.process=process;
-		this.view=view;
-		this.parkingType=parkingType;
-		this.heatingSourcesGas=heatingSourcesGas;
-		this.longitude=longitude;
-		this.latitude=latitude;
-		this.apartmentid=apartmentid;
-		this.approved=approved;
+
+	public String getViewPoint() {
+		return viewPoint;
+	}
+
+	public void setViewPoint(String viewPoint) {
+		this.viewPoint = viewPoint;
 	}
 	
 	public Long getId() {
@@ -208,12 +199,7 @@ public class Apartment implements Comparable<Apartment> {
 	public void setNumFloors(String numFloors) {
 		this.numFloors = numFloors;
 	}
-	public String getView() {
-		return view;
-	}
-	public void setView(String view) {
-		this.view = view;
-	}
+
 	public String getParkingType() {
 		return parkingType;
 	}
@@ -226,15 +212,29 @@ public class Apartment implements Comparable<Apartment> {
 	public void setHeatingSourcesGas(String heatingSourcesGas) {
 		this.heatingSourcesGas = heatingSourcesGas;
 	}
-	private String view;
-	private String parkingType;
-	private String heatingSourcesGas;
 
+	public String getOwner() {
+		return owner;
+	}
 
-	@Override
-	public int compareTo(Apartment o) {
-		// TODO Auto-generated method stub
-		return 1;
+	public void setOwner(String owner) {
+		this.owner = owner;
+	}
+
+	public String getApartmentId() {
+		return apartmentId;
+	}
+
+	public void setApartmentId(String apartmentId) {
+		this.apartmentId = apartmentId;
+	}
+
+	public List<ImageUrl> getImageUrls() {
+		return imageUrls;
+	}
+
+	public void setImageUrls(List<ImageUrl> imageUrls) {
+		this.imageUrls = imageUrls;
 	}
 
 	

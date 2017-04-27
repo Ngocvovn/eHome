@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.duyngoc.model.Apartment;
@@ -27,6 +28,20 @@ public class SearchController {
 	@RequestMapping(value = "/{city}/{street}", method = RequestMethod.GET)
 	public ResponseEntity<?> getApartment(@PathVariable String city, @PathVariable String street){
 		try {
+			return new ResponseEntity<TreeSet<Apartment>>(service.getDataFromStreet(city, street),HttpStatus.OK);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			return new ResponseEntity<String>("errow"+e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<?> getApartmentQueryParams(@RequestParam(name="city",required=false) String city, @RequestParam(name="street", required=false) String street){
+		try {
+			System.out.println(city +" street:"+street);
+			if(street==null){
+				System.out.println("null nice");
+			}
 			return new ResponseEntity<TreeSet<Apartment>>(service.getDataFromStreet(city, street),HttpStatus.OK);
 			
 		} catch (Exception e) {

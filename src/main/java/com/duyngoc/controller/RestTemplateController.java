@@ -73,7 +73,7 @@ public class RestTemplateController {
 		apartment.setOwner("eHome");
 		getApartment(apartment,json);
 		return json;
-	}
+	}*/
 
 	@RequestMapping(value = "/apartment", method = RequestMethod.GET)
 	public Apartment getApartment(Apartment apartment,String zpid) throws IOException {
@@ -178,7 +178,7 @@ public class RestTemplateController {
 		}
 	
 		return apartment;
-	}*/
+	}
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ResponseEntity<List<Student>> home() {

@@ -76,7 +76,7 @@ public class ApartmentService {
 	}
 	
 	public Apartment save(Apartment apartment){
-		System.out.println("ngoc");
+
 		return aparmentRepository.save(apartment);
 	}
 

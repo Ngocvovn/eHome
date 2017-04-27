@@ -25,7 +25,6 @@ public class ApartmentServiceTest {
 		Apartment tes = new Apartment();
 		tes.setId((long) 20);
 		tes.setStreet("lintu");
-		System.out.println(tes.getStreet()+tes);
 		Apartment apartment= apartmentService.save(tes);
 		assertEquals("lintu", apartment.getStreet());
 		assertNull(apartment.getImageUrls());

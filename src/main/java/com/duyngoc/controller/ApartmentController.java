@@ -23,6 +23,8 @@ public class ApartmentController {
 	@Autowired
 	private ApartmentService service;
 	
+
+	
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public ResponseEntity<?> addAparrtment(@RequestBody Apartment apartment) {
 		try{

@@ -32,8 +32,8 @@ public class Apartment implements Comparable<Apartment> {
 	private boolean approved;
 	private String latitude;
 	private boolean available;
-	private String bedrooms;
-	private String bathrooms;
+	private int bedrooms;
+	private float bathrooms;
 	private String finishedSqFt;
 	private String lotSizeSqFt;
 	private String yearBuilt;
@@ -157,16 +157,16 @@ public class Apartment implements Comparable<Apartment> {
 	public void setRooms(String rooms) {
 		this.rooms = rooms;
 	}
-	public String getBedrooms() {
+	public int getBedrooms() {
 		return bedrooms;
 	}
-	public void setBedrooms(String bedrooms) {
+	public void setBedrooms(int bedrooms) {
 		this.bedrooms = bedrooms;
 	}
-	public String getBathrooms() {
+	public float getBathrooms() {
 		return bathrooms;
 	}
-	public void setBathrooms(String bathrooms) {
+	public void setBathrooms(float bathrooms) {
 		this.bathrooms = bathrooms;
 	}
 	public String getFinishedSqFt() {

@@ -79,5 +79,12 @@ public class ApartmentService {
 
 		return aparmentRepository.save(apartment);
 	}
+	
+	public List<Apartment> customSearch(String city, String street, double minPrice, double maxPrice, int bedrooms){
+		if(bedrooms>=100){
+			return aparmentRepository.searchResultWithoutBedrooms(city, street, minPrice, maxPrice);
+		}
+		return aparmentRepository.searchResultWithBedrooms(city, street, minPrice, maxPrice, bedrooms);
+	}
 
 }

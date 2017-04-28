@@ -22,8 +22,8 @@ import com.duyngoc.repository.StudentRepository;
 /*import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;*/
-
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+*/
 @RestController
 @RequestMapping("/ehome")
 public class RestTemplateController {
@@ -132,11 +132,11 @@ public class RestTemplateController {
 			} 
 			else if (split[i].equals("<bedrooms")) {
 				System.out.println(split[i] + split[i + 1] + split[i + 2]);
-				apartment.setBedrooms(split[i+1].split("<")[0]);
+				apartment.setBedrooms(Integer.parseInt(split[i+1].split("<")[0]));
 			}
 			else if (split[i].equals("<bathrooms")) {
 				System.out.println(split[i] + split[i + 1] + split[i + 2]);
-				apartment.setBathrooms(split[i+1].split("<")[0]);
+				apartment.setBathrooms(Float.parseFloat(split[i+1].split("<")[0]));
 			} 
 			else if (split[i].equals("<finishedSqFt")) {
 				System.out.println(split[i] + split[i + 1] + split[i + 2]);

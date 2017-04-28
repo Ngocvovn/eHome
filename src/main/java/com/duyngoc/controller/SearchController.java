@@ -2,8 +2,6 @@ package com.duyngoc.controller;
 
 import java.util.TreeSet;
 
-import static org.junit.Assert.fail;
-
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

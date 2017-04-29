@@ -1,5 +1,6 @@
 package com.duyngoc.service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -29,11 +30,11 @@ public class ApartmentService {
 
 		} else if (street.equals("all")) {
 			System.out.println("card");
-			apartments= aparmentRepository.findByCity(city);
+			apartments = aparmentRepository.findByCity(city);
 		} else {
-			apartments= findStreet(city, street);
+			apartments = findStreet(city, street);
 		}
-		
+
 		addImagesOfApartment(apartments);
 		return apartments;
 
@@ -41,14 +42,11 @@ public class ApartmentService {
 
 	public TreeSet<Apartment> findStreet(String city, String street) {
 		TreeSet<Apartment> apartments = new TreeSet<>();
-		if(!city.equals("all")){
+		if (!city.equals("all")) {
 			apartments = aparmentRepository.findByCity(city);
-		}
-		else{
+		} else {
 			apartments.addAll((Collection<? extends Apartment>) aparmentRepository.findAll());
 		}
-
-	
 
 		Iterator<Apartment> iterator = apartments.iterator();
 		while (iterator.hasNext()) {
@@ -59,32 +57,36 @@ public class ApartmentService {
 
 		return apartments;
 	}
-	
-	public void addImagesOfApartment(Collection<Apartment> apartments){
+
+	public void addImagesOfApartment(Collection<Apartment> apartments) {
 		Iterator<Apartment> iterator = apartments.iterator();
-		
-		while(iterator.hasNext()){
+
+		while (iterator.hasNext()) {
 			Apartment apartment = iterator.next();
 			apartment.setImageUrls(imageRepository.findByAparmentid(apartment.getApartmentId()));
 		}
 	}
-	
-	public List<Apartment> getApartmentsByOwner(String owner){
+
+	public List<Apartment> getApartmentsByOwner(String owner) {
 		List<Apartment> apartments = aparmentRepository.findByOwner(owner);
 		addImagesOfApartment(apartments);
 		return apartments;
 	}
-	
-	public Apartment save(Apartment apartment){
+
+	public Apartment save(Apartment apartment) {
 
 		return aparmentRepository.save(apartment);
 	}
-	
-	public List<Apartment> customSearch(String city, String street, double minPrice, double maxPrice, int bedrooms){
-		if(bedrooms>=100){
-			return aparmentRepository.searchResultWithoutBedrooms(city, street, minPrice, maxPrice);
+
+	public List<Apartment> customSearch(String city, String street, double minPrice, double maxPrice, int bedrooms) {
+		List<Apartment> apartments = new ArrayList<>();
+		if (bedrooms >= 100) {
+			apartments = aparmentRepository.searchResultWithoutBedrooms(city, street, minPrice, maxPrice);
+		} else {
+			apartments = aparmentRepository.searchResultWithBedrooms(city, street, minPrice, maxPrice, bedrooms);
 		}
-		return aparmentRepository.searchResultWithBedrooms(city, street, minPrice, maxPrice, bedrooms);
+		addImagesOfApartment(apartments);
+		return apartments;
 	}
 
 }

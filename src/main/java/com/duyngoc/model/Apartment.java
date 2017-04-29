@@ -48,6 +48,7 @@ public class Apartment implements Comparable<Apartment> {
 		
 	}
 	
+	
 /*	public Apartment(String apartmentid, Boolean approved, String owner,String process,String bathrooms,String view,String parkingType, String longitude,String latitude, String heatingSourcesGas, String street, String city, double price, String rooms, String bedrooms, String finishedSqft, String lotSizeSqft,String yearBuilt, String yearUpdated, String floors){
 		this.street=street;
 		this.city=city;

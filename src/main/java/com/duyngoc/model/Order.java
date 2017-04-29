@@ -46,5 +46,13 @@ public class Order {
 	public void setApproved(boolean approved) {
 		this.approved = approved;
 	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
 	
 }

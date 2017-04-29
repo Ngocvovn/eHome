@@ -51,15 +51,25 @@ public class ApartmentControllerTest {
 	
 	@Before
 	public void createData() throws Exception{
-		Apartment apartment = new Apartment((long) 1, "Helsinki");
+		Apartment apartment = new Apartment();
+		apartment.setId((long) 1);
+		apartment.setCity("Helsinki");
 		apartment.setOwner("ehome");
 		service.save(apartment);
 	
 	}
 	
+	public Apartment createApartmentForTest(Long id, String city,String owner){
+		Apartment apartment = new Apartment();
+		apartment.setId(id);
+		apartment.setCity(city);
+		apartment.setOwner(owner);
+		return apartment;
+	}
+	
 	@Test
 	public void serializeJson() throws IOException{
-		Apartment apartment = new Apartment((long) 10, "Helsinki");
+		Apartment apartment = createApartmentForTest((long)10, "Helsinki", "ehome");
 		apartment.setOwner("ehome");
 		System.out.println(json.write(apartment));
 		assertThat(json.write(apartment)).extractingJsonPathArrayValue("ehome", "@.owner");
@@ -92,8 +102,7 @@ public class ApartmentControllerTest {
 	
 	@Test
 	public void createNewSuccefully(){
-		Apartment apartment = new Apartment((long) 2, "Helsinki");
-		apartment.setOwner("ehome2");
+		Apartment apartment =createApartmentForTest((long)2, "Helsinki", "ehome2");
 		ResponseEntity<Apartment> entity = testRestTemplate.postForEntity("http://localhost:"+port+"/api/apartment/", apartment, Apartment.class);
 		assertNotNull(entity.getBody());
 		assertTrue(entity.getBody().getId()==2&&entity.getBody().getOwner().equals("ehome2"));	
@@ -102,8 +111,7 @@ public class ApartmentControllerTest {
 	
 	@Test
 	public void updateSuccessfully() throws Exception{
-		Apartment apartment = new Apartment((long) 1, "Espoo");
-		apartment.setOwner("ehome");
+		Apartment apartment = createApartmentForTest((long)1, "Espoo", "ehome");
 		ResponseEntity<Apartment> entity = testRestTemplate.postForEntity("http://localhost:"+port+"/api/apartment/", apartment, Apartment.class);
 		assertNotNull(entity.getBody());
 		assertTrue(entity.getBody().getId()==1&&entity.getBody().getCity().equals("Espoo"));

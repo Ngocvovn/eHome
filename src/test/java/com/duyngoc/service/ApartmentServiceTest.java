@@ -61,7 +61,7 @@ public class ApartmentServiceTest {
 		tes.setPrice(3000);
 		tes.setBedrooms(4);
 		apartmentService.save(tes);
-		List<Apartment> apartments = apartmentService.customSearch("Helsinki", "Lintu", 1000, 4000, 4);
+		List<Apartment> apartments = apartmentService.customSearch("Helsinki", "Lintu", 1000, 4000, 4,100,0,100000,"garage");
 		assertNotNull(apartments);
 		assertEquals(1, apartments.size());
 		assertEquals("Helsinki", apartments.get(0).getCity());
@@ -74,7 +74,7 @@ public class ApartmentServiceTest {
 		tes.setPrice(3000);
 		tes.setBedrooms(4);
 		apartmentService.save(tes);
-		List<Apartment> apartments = apartmentService.customSearch("Helsinki", "Lintu", 1000, 4000, 5);
+		List<Apartment> apartments = apartmentService.customSearch("Helsinki", "Lintu", 1000, 4000, 4,100,0,100000,"garage");
 		assertNotNull(apartments);
 		assertEquals(0, apartments.size());
 	}
@@ -86,7 +86,7 @@ public class ApartmentServiceTest {
 		tes.setPrice(3000);
 		tes.setBedrooms(4);
 		apartmentService.save(tes);
-		List<Apartment> apartments = apartmentService.customSearch("Helsinki", "Lintu", 1000, 4000,100);
+		List<Apartment> apartments = apartmentService.customSearch("Helsinki", "Lintu", 1000, 4000, 4,100,0,100000,"garage");
 		assertNotNull(apartments);
 		assertEquals(1, apartments.size());
 	}

@@ -1,5 +1,7 @@
 package com.duyngoc.controller;
 
+import static org.mockito.Matchers.floatThat;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -140,12 +142,12 @@ public class RestTemplateController {
 			} 
 			else if (split[i].equals("<finishedSqFt")) {
 				System.out.println(split[i] + split[i + 1] + split[i + 2]);
-				apartment.setFinishedSqFt(split[i+1].split("<")[0]);
+				apartment.setFinishedSqFt(Float.parseFloat(split[i+1].split("<")[0]));
 			}
 			
 			else if (split[i].equals("<lotSizeSqFt")) {
 				System.out.println(split[i] + split[i + 1] + split[i + 2]);
-				apartment.setLotSizeSqFt(split[i+1].split("<")[0]);
+				apartment.setLotSizeSqFt(Float.parseFloat(split[i+1].split("<")[0]));
 				
 			}
 			

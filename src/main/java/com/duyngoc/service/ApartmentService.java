@@ -22,41 +22,8 @@ public class ApartmentService {
 	@Autowired
 	private ImageUrlRepostiory imageRepository;
 
-	public TreeSet<Apartment> getDataFromStreet(String city, String street) {
 
-		TreeSet<Apartment> apartments = new TreeSet<>();
-		if (city.equals("all") && street.equals("all")) {
-			apartments.addAll((Collection<? extends Apartment>) aparmentRepository.findAll());
 
-		} else if (street.equals("all")) {
-			System.out.println("card");
-			apartments = aparmentRepository.findByCity(city);
-		} else {
-			apartments = findStreet(city, street);
-		}
-
-		addImagesOfApartment(apartments);
-		return apartments;
-
-	}
-
-	public TreeSet<Apartment> findStreet(String city, String street) {
-		TreeSet<Apartment> apartments = new TreeSet<>();
-		if (!city.equals("all")) {
-			apartments = aparmentRepository.findByCity(city);
-		} else {
-			apartments.addAll((Collection<? extends Apartment>) aparmentRepository.findAll());
-		}
-
-		Iterator<Apartment> iterator = apartments.iterator();
-		while (iterator.hasNext()) {
-			if (!iterator.next().getStreet().contains(street)) {
-				iterator.remove();
-			}
-		}
-
-		return apartments;
-	}
 
 	public void addImagesOfApartment(Collection<Apartment> apartments) {
 		Iterator<Apartment> iterator = apartments.iterator();
@@ -78,12 +45,22 @@ public class ApartmentService {
 		return aparmentRepository.save(apartment);
 	}
 
-	public List<Apartment> customSearch(String city, String street, double minPrice, double maxPrice, int bedrooms) {
+	public List<Apartment> customSearch(String city, String street, double minPrice, double maxPrice, int bedrooms,
+			float bathrooms, float minArea, float maxArea, String garage) {
 		List<Apartment> apartments = new ArrayList<>();
-		if (bedrooms >= 100) {
-			apartments = aparmentRepository.searchResultWithoutBedrooms(city, street, minPrice, maxPrice);
+		if (bedrooms >= 100 && bathrooms >= 100) {
+			apartments = aparmentRepository.searchResultWithoutRooms(city, street, minPrice, maxPrice, minArea, maxArea,
+					garage);
+		} else if (bedrooms >= 100) {
+			apartments = aparmentRepository.searchResultWithBathrooms(city, street, minPrice, maxPrice, bathrooms,
+					minArea, maxArea, garage);
+		} else if (bathrooms >= 100) {
+			System.out.println("here");
+			apartments = aparmentRepository.searchResultWithBedrooms(city, street, minPrice, maxPrice, bedrooms,
+					minArea, maxArea, garage);
 		} else {
-			apartments = aparmentRepository.searchResultWithBedrooms(city, street, minPrice, maxPrice, bedrooms);
+			apartments = aparmentRepository.searchResult(city, street, minPrice, maxPrice, bedrooms, bathrooms, minArea,
+					maxArea, garage);
 		}
 		addImagesOfApartment(apartments);
 		return apartments;

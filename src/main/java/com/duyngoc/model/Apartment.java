@@ -34,8 +34,8 @@ public class Apartment implements Comparable<Apartment> {
 	private boolean available;
 	private int bedrooms;
 	private float bathrooms;
-	private String finishedSqFt;
-	private String lotSizeSqFt;
+	private float finishedSqFt;
+	private float lotSizeSqFt;
 	private String yearBuilt;
 	private String yearUpdated;
 	private String numFloors;
@@ -48,29 +48,6 @@ public class Apartment implements Comparable<Apartment> {
 		
 	}
 	
-	
-/*	public Apartment(String apartmentid, Boolean approved, String owner,String process,String bathrooms,String view,String parkingType, String longitude,String latitude, String heatingSourcesGas, String street, String city, double price, String rooms, String bedrooms, String finishedSqft, String lotSizeSqft,String yearBuilt, String yearUpdated, String floors){
-		this.street=street;
-		this.city=city;
-		this.price=price;
-		this.rooms=rooms;
-		this.bedrooms=bedrooms;
-		this.finishedSqFt=finishedSqft;
-		this.lotSizeSqFt=lotSizeSqft;
-		this.yearBuilt=yearBuilt;
-		this.yearUpdated=yearUpdated;
-		this.numFloors=floors;
-		this.owner=owner;
-		this.bathrooms=bathrooms;
-		this.process=process;
-		this.view=view;
-		this.parkingType=parkingType;
-		this.heatingSourcesGas=heatingSourcesGas;
-		this.longitude=longitude;
-		this.latitude=latitude;
-		this.apartmentid=apartmentid;
-		this.approved=approved;
-	}*/
 	public boolean isApproved() {
 		return approved;
 	}
@@ -170,18 +147,7 @@ public class Apartment implements Comparable<Apartment> {
 	public void setBathrooms(float bathrooms) {
 		this.bathrooms = bathrooms;
 	}
-	public String getFinishedSqFt() {
-		return finishedSqFt;
-	}
-	public void setFinishedSqFt(String finishedSqFt) {
-		this.finishedSqFt = finishedSqFt;
-	}
-	public String getLotSizeSqFt() {
-		return lotSizeSqFt;
-	}
-	public void setLotSizeSqFt(String lotSizeSqFt) {
-		this.lotSizeSqFt = lotSizeSqFt;
-	}
+	
 	public String getYearBuilt() {
 		return yearBuilt;
 	}
@@ -236,6 +202,26 @@ public class Apartment implements Comparable<Apartment> {
 
 	public void setImageUrls(List<ImageUrl> imageUrls) {
 		this.imageUrls = imageUrls;
+	}
+
+
+	public float getFinishedSqFt() {
+		return finishedSqFt;
+	}
+
+
+	public void setFinishedSqFt(float finishedSqFt) {
+		this.finishedSqFt = finishedSqFt;
+	}
+
+
+	public float getLotSizeSqFt() {
+		return lotSizeSqFt;
+	}
+
+
+	public void setLotSizeSqFt(float lotSizeSqFt) {
+		this.lotSizeSqFt = lotSizeSqFt;
 	}
 
 	

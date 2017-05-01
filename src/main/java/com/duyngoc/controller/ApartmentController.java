@@ -45,6 +45,7 @@ public class ApartmentController {
 			return new ResponseEntity<List<Apartment>>(service.getApartmentsByOwner(owner),HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 			return new ResponseEntity<String>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}

@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.duyngoc.model.Apartment;
+import com.duyngoc.repository.ApartmentRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -21,6 +22,8 @@ public class ApartmentServiceTest {
 	@Autowired
 	private ApartmentService apartmentService;
 	
+	@Autowired
+	private ApartmentRepository apartmentRepository;
 
 	@Test
 	public void saveSuccessfully(){
@@ -45,8 +48,10 @@ public class ApartmentServiceTest {
 		tes.setId((long) 20);
 		tes.setStreet("lintu");
 		tes.setOwner("ngoc");
+		
 		apartmentService.save(tes);
 		List<Apartment> apartments= apartmentService.getApartmentsByOwner("ngoc");
+		
 		assertNotNull(apartments);
 		assertEquals(1, apartments.size());
 		assertEquals("ngoc", apartments.get(0).getOwner());
@@ -72,8 +77,10 @@ public class ApartmentServiceTest {
 		tes.setCity("Helsinki");
 		tes.setStreet("Lintu");
 		tes.setPrice(3000);
-		tes.setBedrooms(4);
+		tes.setBedrooms(3);
+		tes.setParkingType("garage");
 		apartmentService.save(tes);
+		System.out.println(tes);
 		List<Apartment> apartments = apartmentService.customSearch("Helsinki", "Lintu", 1000, 4000, 4,100,0,100000,"garage");
 		assertNotNull(apartments);
 		assertEquals(0, apartments.size());
@@ -85,8 +92,9 @@ public class ApartmentServiceTest {
 		tes.setStreet("Lintu");
 		tes.setPrice(3000);
 		tes.setBedrooms(4);
+		tes.setParkingType("garage");
 		apartmentService.save(tes);
-		List<Apartment> apartments = apartmentService.customSearch("Helsinki", "Lintu", 1000, 4000, 4,100,0,100000,"garage");
+		List<Apartment> apartments = apartmentService.customSearch("Helsinki", "Lintu",0, 4000, 4,100,0,100000,"garage");
 		assertNotNull(apartments);
 		assertEquals(1, apartments.size());
 	}

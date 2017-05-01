@@ -48,6 +48,11 @@ public class Apartment implements Comparable<Apartment> {
 		
 	}
 	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return city +" "+street+" "+ owner+" " +bedrooms+" "+ bathrooms;
+	}
 	public boolean isApproved() {
 		return approved;
 	}

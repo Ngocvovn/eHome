@@ -35,11 +35,10 @@ public interface ApartmentRepository extends CrudRepository<Apartment, Long> {
 	List<Apartment> searchResultWithBathrooms(String city, String street, double minPrice, double maxPrice,
 			float bathrooms, float minArea, float maxArea, String garage);
 
-	@Query("select apartment from Apartment apartment where apartment.city like %?1% and apartment.street like %?2% AND"
-			+ " apartment.price>=?3 and apartment.price<=?4 and"
-			+ " apartment.lotSizeSqFt>=?5 and apartment.lotSizeSqFt<=?6 and apartment.parkingType like %?7%")
+	@Query("select apartment from Apartment apartment where apartment.city like %?1% and apartment.street like %?2% "
+			+ "AND apartment.price>=?3 and apartment.price<=?4 and apartment.lotSizeSqFt>=?5"
+			+ " and apartment.lotSizeSqFt<=?6 and apartment.parkingType like %?7%")
 	List<Apartment> searchResultWithoutRooms(String city, String street, double minPrice, double maxPrice,
 			float minArea, float maxArea, String garage);
-
 
 }

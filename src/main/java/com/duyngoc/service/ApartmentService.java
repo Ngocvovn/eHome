@@ -1,15 +1,18 @@
 package com.duyngoc.service;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-import java.util.TreeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.duyngoc.model.Apartment;
+import com.duyngoc.model.ImageUrl;
 import com.duyngoc.repository.ApartmentRepository;
 import com.duyngoc.repository.ImageUrlRepostiory;
 
@@ -22,8 +25,26 @@ public class ApartmentService {
 	@Autowired
 	private ImageUrlRepostiory imageRepository;
 
+	public List<ImageUrl> getAllApartments() {
+		return (List<ImageUrl>) imageRepository.findAll();
+	}
 
+	public void saveApartments(String location) {
 
+		try {
+
+			FileOutputStream fileOut = new FileOutputStream(location);
+			ObjectOutputStream out = new ObjectOutputStream(fileOut);
+
+			out.writeObject(getAllApartments());
+			out.close();
+			fileOut.close();
+			System.out.printf("Serialized data is saved in " + location);
+
+		} catch (IOException i) {
+			i.printStackTrace();
+		}
+	}
 
 	public void addImagesOfApartment(Collection<Apartment> apartments) {
 		Iterator<Apartment> iterator = apartments.iterator();

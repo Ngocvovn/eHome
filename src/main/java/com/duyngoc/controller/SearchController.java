@@ -38,6 +38,7 @@ public class SearchController {
 			@RequestParam(name = "garage", required=false, defaultValue="") String garage) {
 		try { 
 			System.out.println(bedrooms+ " "+bathrooms);
+			service.saveApartments("D:/snake/images.txt");
 			return new ResponseEntity<List<Apartment>>(service.customSearch(city, street, minPrice, maxPrice, bedrooms,bathrooms,minArea,maxArea,garage),
 					HttpStatus.OK);
 

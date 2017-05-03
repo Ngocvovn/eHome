@@ -36,6 +36,8 @@ public class UserController {
 	public ResponseEntity<?> addEmployee(@RequestBody User employee) {
 		try {
 			if (userRepo.findByUsername(employee.getUsername()) != null && employee.getId() == MAX) {
+				
+				//throw new Exception("Username has existed");
 				return new ResponseEntity<Exception>(new Exception("Username has existed"), HttpStatus.NOT_ACCEPTABLE);
 			}
 

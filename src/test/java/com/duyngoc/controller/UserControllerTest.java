@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -43,18 +44,24 @@ public class UserControllerTest {
 		JacksonTester.initFields(this, objectMapper);
 	}
 
+
 	@Before
 	public void createUser() {
 		User user = new User();
-		user.setId((long) 10);
+		user.setId((long) 100);
 		user.setUsername("vo");
 		user.setRole("ROLE_USER");
 		User employee = new User();
-		employee.setId((long) 10);
+		employee.setId((long) 100);
 		employee.setUsername("jim");
 		employee.setRole("ROLE_EMPLOYEE");
+		User employee2 = new User();
+		employee2.setId((long) 100);
+		employee2.setUsername("anna");
+		employee2.setRole("ROLE_EMPLOYEE");
 		userRepository.save(user);
 		userRepository.save(employee);
+		userRepository.save(employee2);
 
 	}
 
@@ -67,7 +74,7 @@ public class UserControllerTest {
 		userRepository.save(user);
 		List<User> users = (List<User>) userRepository.findAll();
 		assertNotNull(users);
-		assertTrue(users.size() == 2);
+		assertTrue(users.size() == 3);
 		assertTrue(users.get(0).getUsername().equals("vu"));
 
 	}
@@ -117,5 +124,9 @@ public class UserControllerTest {
 
 	}
 	
+	
+	
+	
+
 
 }

@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Mon May 01 21:52:28 EEST 2017:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.13.1.1 - (1765088): instance a816c00e-015b-c55b-526c-000008830748 
+Wed May 03 11:10:53 EEST 2017:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.13.1.1 - (1765088): instance a816c00e-015b-cd5c-a710-00000a8b98d8 
 on database directory memory:C:\Users\51202_000\Documents\workspace-sts-3.8.3.RELEASE\blackJack\testdb with class loader sun.misc.Launcher$AppClassLoader@6576fe71 
 Loaded from file:/C:/Users/51202_000/.m2/repository/org/apache/derby/derby/10.13.1.1/derby-10.13.1.1.jar
 java.vendor=Oracle Corporation

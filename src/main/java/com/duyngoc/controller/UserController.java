@@ -22,7 +22,7 @@ public class UserController {
 	private UserRepository userRepo;
 
 	@RequestMapping(value = "/user", method = RequestMethod.POST)
-	public ResponseEntity<?> addUser(@RequestBody User user) {
+	public ResponseEntity<?> updateUser(@RequestBody User user) {
 		try {
 			userRepo.save(user);
 			return new ResponseEntity<User>(user, HttpStatus.OK);
@@ -36,7 +36,7 @@ public class UserController {
 	public ResponseEntity<?> addEmployee(@RequestBody User employee) {
 		try {
 			if (userRepo.findByUsername(employee.getUsername()) != null && employee.getId() == MAX) {
-				return new ResponseEntity<String>("Username has existed", HttpStatus.NOT_ACCEPTABLE);
+				return new ResponseEntity<Exception>(new Exception("Username has existed"), HttpStatus.NOT_ACCEPTABLE);
 			}
 
 			employee.setRole("ROLE_EMPLOYEE");

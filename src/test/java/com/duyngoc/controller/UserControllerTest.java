@@ -1,13 +1,26 @@
 package com.duyngoc.controller;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.json.JacksonTester;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.duyngoc.model.Apartment;
+import com.duyngoc.model.User;
 import com.duyngoc.repository.UserRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment=WebEnvironment.RANDOM_PORT)
@@ -19,6 +32,61 @@ public class UserControllerTest {
 	@Autowired
 	private UserRepository userRepository;
 	
+	@Autowired
+	private TestRestTemplate testRestTemplate;
 	
+	private JacksonTester<Apartment> json;
+	
+	@Before
+	public void setup(){
+		ObjectMapper objectMapper= new ObjectMapper();
+		JacksonTester.initFields(this, objectMapper);
+	}
+	
+	@Before
+	public void createUser(){
+		User user = new User();
+		user.setId((long)10);
+		user.setUsername("vo");
+		userRepository.save(user);
+		
+	
+	}
+	
+	@Test
+	public void updateSuccessfully(){
+		User user = userRepository.findByUsername("vo");
+		assertNotNull(user);
+		assertTrue(user.getUsername().equals("vo"));
+		user.setUsername("vu");
+		userRepository.save(user);
+		List<User> users = (List<User>) userRepository.findAll();
+		assertNotNull(users);
+		assertTrue(users.size()==1);
+		assertTrue(users.get(0).getUsername().equals("vu"));
+		
+		
+	}
+	
+	@Test
+	public void createNewUser(){
+		User user = new User();
+		user.setId((long) 1000000);
+		user.setUsername("ngoc");
+		user = userRepository.save(user);
+		assertNotNull(user);
+		assertTrue(user.getUsername().equals("ngoc"));
+	}
+	
+	@Test
+	public void updateUserSuccessfully(){
+		User user = userRepository.findByUsername("vo");
+		System.out.println(user.getUsername()+user.getId());
+		user.setUsername("jack");
+		ResponseEntity<User> entity = this.testRestTemplate.postForEntity("http://localhost:"+port+"/api/user",user,User.class);
+		User update = entity.getBody();
+		assertTrue(user.getId()==update.getId());
+		assertTrue(update.getUsername().equals("jack"));
+	}
 	
 }

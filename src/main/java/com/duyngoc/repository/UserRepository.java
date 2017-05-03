@@ -7,5 +7,6 @@ import com.duyngoc.model.User;
 public interface UserRepository extends CrudRepository<User, Long> {
 	
 	User findByUsername(String username);
+	User findById(Long id);
 
 }

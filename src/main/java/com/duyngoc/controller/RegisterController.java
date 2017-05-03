@@ -12,7 +12,7 @@ import com.duyngoc.model.User;
 import com.duyngoc.repository.UserRepository;
 
 @RestController
-@RequestMapping("/register")
+@RequestMapping("/registerUser")
 public class RegisterController {
 	
 	@Autowired

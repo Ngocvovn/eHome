@@ -3,8 +3,6 @@ package com.duyngoc.repository;
 import java.util.List;
 import java.util.TreeSet;
 
-import javax.naming.directory.SearchResult;
-
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 

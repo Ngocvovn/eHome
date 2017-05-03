@@ -7,8 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
 @Entity
-@Table(name="customer")
+@Table(name = "customer")
 
 public class User implements Serializable {
 	/**
@@ -23,6 +24,12 @@ public class User implements Serializable {
 	private String password;
 	private Boolean enabled;
 	private String role;
+	private String email;
+	private String avatarUrl;
+	private String phonenumber;
+
+	public User() {
+	}
 
 	public String getRole() {
 		return role;
@@ -36,14 +43,9 @@ public class User implements Serializable {
 		this.avatarUrl = avatarUrl;
 	}
 
-	public User() {
+	public User(String name) {
+		this.name = name;
 	}
-	
-	public User(String name){
-		this.name=name;
-	}
-
-
 
 	public Long getId() {
 		return id;
@@ -109,7 +111,4 @@ public class User implements Serializable {
 		this.phonenumber = phonenumber;
 	}
 
-	private String email;
-	private String avatarUrl;
-	private String phonenumber;
 }

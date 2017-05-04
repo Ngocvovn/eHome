@@ -1,5 +1,7 @@
 package com.duyngoc.controller;
 
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.duyngoc.model.Apartment;
+import com.duyngoc.model.ImageUrl;
+import com.duyngoc.repository.ApartmentRepository;
+import com.duyngoc.repository.ImageUrlRepostiory;
 import com.duyngoc.service.ApartmentService;
 
 @RestController
@@ -21,9 +26,9 @@ public class SearchController {
 
 	@Autowired
 	private ApartmentService service;
-
-
-
+	
+	@Autowired
+	private ImageUrlRepostiory repo;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<?> getApartmentQueryParams(
@@ -37,8 +42,7 @@ public class SearchController {
 			@RequestParam(name = "maxArea", required=false, defaultValue="1000000") float maxArea,
 			@RequestParam(name = "garage", required=false, defaultValue="") String garage) {
 		try { 
-			System.out.println(bedrooms+ " "+bathrooms);
-			service.saveApartments("D:/snake/images.txt");
+			
 			return new ResponseEntity<List<Apartment>>(service.customSearch(city, street, minPrice, maxPrice, bedrooms,bathrooms,minArea,maxArea,garage),
 					HttpStatus.OK);
 
@@ -48,6 +52,7 @@ public class SearchController {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
 
 
 }

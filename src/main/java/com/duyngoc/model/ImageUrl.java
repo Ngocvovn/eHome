@@ -23,18 +23,18 @@ public class ImageUrl implements  Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String url;
-	private String aparmentid;
+	private String apartmentId;
 	
-	public String getAparmentid() {
-		return aparmentid;
+	public String getApartmentId() {
+		return apartmentId;
 	}
 
-	public void setAparmentid(String aparmentid) {
-		this.aparmentid = aparmentid;
+	public void setApartmentId(String apartmentId) {
+		this.apartmentId = apartmentId;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "apartmentId")
+	@JoinColumn(name = "apartment")
 	private Apartment apartment;
 
 	public ImageUrl() {

@@ -29,29 +29,12 @@ public class ApartmentService {
 		return (List<ImageUrl>) imageRepository.findAll();
 	}
 
-	public void saveApartments(String location) {
-
-		try {
-
-			FileOutputStream fileOut = new FileOutputStream(location);
-			ObjectOutputStream out = new ObjectOutputStream(fileOut);
-
-			out.writeObject(getAllApartments());
-			out.close();
-			fileOut.close();
-			System.out.printf("Serialized data is saved in " + location);
-
-		} catch (IOException i) {
-			i.printStackTrace();
-		}
-	}
-
 	public void addImagesOfApartment(Collection<Apartment> apartments) {
 		Iterator<Apartment> iterator = apartments.iterator();
 
 		while (iterator.hasNext()) {
 			Apartment apartment = iterator.next();
-			apartment.setImageUrls(imageRepository.findByAparmentid(apartment.getApartmentId()));
+			apartment.setImageUrls(imageRepository.findByApartmentId(apartment.getApartmentId()));
 		}
 	}
 

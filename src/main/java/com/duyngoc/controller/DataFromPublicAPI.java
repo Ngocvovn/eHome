@@ -82,7 +82,7 @@ public class DataFromPublicAPI {
 			} else if (split[i].equals("<url")) {
 			
 				ImageUrl url = new ImageUrl();
-				url.setAparmentid(apartment.getApartmentId());
+				url.setApartmentId(apartment.getApartmentId());
 				url.setUrl(split[i + 1].split("<")[0]);
 				imageRepo.save(url);
 			}

@@ -10,4 +10,8 @@ deploy:
   app: ehomemetro
   on:
     repo: Ngocvovn/eHome
+    branch: master
+  app: ehomedevbranch
+  on:
+    repo: Ngocvovn/eHome
     branch: develop

@@ -94,7 +94,7 @@ public class ApartmentServiceTest {
 		tes.setBedrooms(4);
 		tes.setParkingType("garage");
 		apartmentService.save(tes);
-		List<Apartment> apartments = apartmentService.customSearch("Helsinki", "Lintu",0, 4000, 4,100,0,100000,"garage");
+		List<Apartment> apartments = apartmentService.customSearch("Helsinki", "Lintu",0, 4000, 4,100,0,100000,"Yes");
 		assertNotNull(apartments);
 		assertEquals(1, apartments.size());
 	}

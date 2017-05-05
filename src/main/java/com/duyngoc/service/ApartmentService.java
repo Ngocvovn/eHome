@@ -54,6 +54,9 @@ public class ApartmentService {
 
 	public List<Apartment> customSearch(String city, String street, double minPrice, double maxPrice, int bedrooms,
 			float bathrooms, float minArea, float maxArea, String garage) {
+		city = reformatParam(city);
+		street= reformatParam(street);
+		garage= formatGarage(garage);
 		List<Apartment> apartments = new ArrayList<>();
 		if (bedrooms >= 100 && bathrooms >= 100) {
 			apartments = aparmentRepository.searchResultWithoutRooms(city, street, minPrice, maxPrice, minArea, maxArea,
@@ -80,9 +83,9 @@ public class ApartmentService {
 	
 	public String formatGarage(String garage){
 		if(garage.equals("Yes")){
-			return "-";
+			return "garage";
 		}
-		return "No";
+		return "no";
 	}
 
 }

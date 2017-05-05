@@ -103,7 +103,7 @@ public class ApartmentControllerTest {
 	@Test
 	public void createNewSuccefully(){
 		Apartment apartment =createApartmentForTest((long)2, "Helsinki", "ehome2");
-		ResponseEntity<Apartment> entity = testRestTemplate.postForEntity("http://localhost:"+port+"/api/apartment/", apartment, Apartment.class);
+		ResponseEntity<Apartment> entity = testRestTemplate.postForEntity("http://localhost:"+port+"/api/apartment/ehome2", apartment, Apartment.class);
 		assertNotNull(entity.getBody());
 		assertTrue(entity.getBody().getId()==2&&entity.getBody().getOwner().equals("ehome2"));	
 		assertEquals(entity.getStatusCode(), HttpStatus.OK);
@@ -111,10 +111,10 @@ public class ApartmentControllerTest {
 	
 	@Test
 	public void updateSuccessfully() throws Exception{
-		Apartment apartment = createApartmentForTest((long)1, "Espoo", "ehome");
-		ResponseEntity<Apartment> entity = testRestTemplate.postForEntity("http://localhost:"+port+"/api/apartment/", apartment, Apartment.class);
+		Apartment apartment = createApartmentForTest((long)10, "Espoo", "ehome");
+		ResponseEntity<Apartment> entity = testRestTemplate.postForEntity("http://localhost:"+port+"/api/apartment/ehome", apartment, Apartment.class);
 		assertNotNull(entity.getBody());
-		assertTrue(entity.getBody().getId()==1&&entity.getBody().getCity().equals("Espoo"));
+		assertTrue(entity.getBody().getCity().equals("Espoo"));
 	}
 	
 	

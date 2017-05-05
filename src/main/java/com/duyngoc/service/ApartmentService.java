@@ -50,6 +50,7 @@ public class ApartmentService {
 		apartment.setImageUrls(null);
 		return aparmentRepository.save(apartment);
 	}
+	
 
 	public List<Apartment> customSearch(String city, String street, double minPrice, double maxPrice, int bedrooms,
 			float bathrooms, float minArea, float maxArea, String garage) {
@@ -70,6 +71,18 @@ public class ApartmentService {
 		}
 		addImagesOfApartment(apartments);
 		return apartments;
+	}
+	
+	public String reformatParam(String query){
+		query = query.toLowerCase();
+		return query;
+	}
+	
+	public String formatGarage(String garage){
+		if(garage.equals("Yes")){
+			return "-";
+		}
+		return "No";
 	}
 
 }

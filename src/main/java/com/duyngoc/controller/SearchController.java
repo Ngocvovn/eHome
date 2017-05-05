@@ -1,7 +1,8 @@
 package com.duyngoc.controller;
 
-import java.io.FileInputStream;
-import java.io.ObjectInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.duyngoc.model.Apartment;
-import com.duyngoc.model.ImageUrl;
-import com.duyngoc.repository.ApartmentRepository;
 import com.duyngoc.repository.ImageUrlRepostiory;
 import com.duyngoc.service.ApartmentService;
 
@@ -26,7 +25,7 @@ public class SearchController {
 
 	@Autowired
 	private ApartmentService service;
-	
+
 	@Autowired
 	private ImageUrlRepostiory repo;
 
@@ -37,14 +36,17 @@ public class SearchController {
 			@RequestParam(name = "minPrice", required = false, defaultValue = "0") double minPrice,
 			@RequestParam(name = "maxPrice", required = false, defaultValue = "10000000") double maxPrice,
 			@RequestParam(name = "bedrooms", required = false, defaultValue = "100") int bedrooms,
-			@RequestParam(name = "bathrooms",required=false,defaultValue="100") float bathrooms,
-			@RequestParam(name = "minArea", required=false, defaultValue="0") float minArea,
-			@RequestParam(name = "maxArea", required=false, defaultValue="1000000") float maxArea,
-			@RequestParam(name = "garage", required=false, defaultValue="") String garage) {
-		try { 
-			
-			return new ResponseEntity<List<Apartment>>(service.customSearch(city, street, minPrice, maxPrice, bedrooms,bathrooms,minArea,maxArea,garage),
-					HttpStatus.OK);
+			@RequestParam(name = "bathrooms", required = false, defaultValue = "100") float bathrooms,
+			@RequestParam(name = "minArea", required = false, defaultValue = "0") float minArea,
+			@RequestParam(name = "maxArea", required = false, defaultValue = "1000000") float maxArea,
+			@RequestParam(name = "garage", required = false, defaultValue = "Yes") String garage) {
+		try {
+			city = service.reformatParam(city);
+			street= service.reformatParam(street);
+			garage= service.formatGarage(garage);
+			return new ResponseEntity<List<Apartment>>(service.customSearch(city, street, minPrice, maxPrice, bedrooms,
+					bathrooms, minArea, maxArea, garage), HttpStatus.OK);
+				
 
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -52,7 +54,6 @@ public class SearchController {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
 
 
 }

@@ -45,7 +45,8 @@ public class ApartmentService {
 	}
 
 	public Apartment save(Apartment apartment) {
-
+		imageRepository.save(apartment.getImageUrls());
+		apartment.setImageUrls(null);
 		return aparmentRepository.save(apartment);
 	}
 

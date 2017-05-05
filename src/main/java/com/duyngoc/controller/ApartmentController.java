@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.duyngoc.model.Apartment;
 import com.duyngoc.service.ApartmentService;
 @RestController
-@RequestMapping("api/apartment")
+@RequestMapping("/api")
 @CrossOrigin
 public class ApartmentController {
 	
@@ -25,11 +25,11 @@ public class ApartmentController {
 	
 
 	
-	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public ResponseEntity<?> addAparrtment(@RequestBody Apartment apartment) {
+	@RequestMapping(value = "/apartment/{owner}", method = RequestMethod.POST)
+	public ResponseEntity<?> addAparrtment(@RequestBody Apartment apartment,@PathVariable String owner) {
 		try{
 			
-			System.out.println(apartment.getStreet()+"  "+apartment.getId());
+			apartment.setOwner(owner);
 			service.save(apartment);
 			return new ResponseEntity<Apartment>(apartment, HttpStatus.OK);
 		}
@@ -39,7 +39,7 @@ public class ApartmentController {
 		
 		
 	}
-	@RequestMapping(value = "/{owner}", method = RequestMethod.GET)
+	@RequestMapping(value = "/apartment/{owner}", method = RequestMethod.GET)
 	public ResponseEntity<?> getApartmentofOwner(@PathVariable String owner){
 		try {
 			return new ResponseEntity<List<Apartment>>(service.getApartmentsByOwner(owner),HttpStatus.OK);

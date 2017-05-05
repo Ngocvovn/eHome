@@ -1,5 +1,7 @@
 package com.duyngoc.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +22,28 @@ public class UserController {
 
 	@Autowired
 	private UserRepository userRepo;
+	
+	@RequestMapping(value="/users", method= RequestMethod.GET)
+	public ResponseEntity<?> getAllUsers(){
+		try {
+			return new ResponseEntity<List<User>>(userRepo.findByRole("ROLE_USER"),HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return new ResponseEntity<Exception>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@RequestMapping(value="/employees", method= RequestMethod.GET)
+	public ResponseEntity<?> getAllEmployees(){
+		try {
+			return new ResponseEntity<List<User>>(userRepo.findByRole("ROLE_EMPLOYEE"),HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return new ResponseEntity<Exception>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 
-	@RequestMapping(value = "/user", method = RequestMethod.POST)
+	@RequestMapping(value = "/users", method = RequestMethod.POST)
 	public ResponseEntity<?> updateUser(@RequestBody User user) {
 		try {
 			userRepo.save(user);
@@ -32,13 +54,13 @@ public class UserController {
 		}
 	}
 
-	@RequestMapping(value = "/employee", method = RequestMethod.POST)
+	@RequestMapping(value = "/employees", method = RequestMethod.POST)
 	public ResponseEntity<?> addEmployee(@RequestBody User employee) {
 		try {
 			if (userRepo.findByUsername(employee.getUsername()) != null && employee.getId() == MAX) {
 				
 				//throw new Exception("Username has existed");
-				return new ResponseEntity<Exception>(new Exception("Username has existed"), HttpStatus.NOT_ACCEPTABLE);
+				return new ResponseEntity<Exception>(new Exception("Username has existed"), HttpStatus.NOT_FOUND);
 			}
 
 			employee.setRole("ROLE_EMPLOYEE");

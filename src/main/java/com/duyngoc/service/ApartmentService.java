@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.duyngoc.model.Apartment;
 import com.duyngoc.model.ImageUrl;
+import com.duyngoc.model.User;
 import com.duyngoc.repository.ApartmentRepository;
 import com.duyngoc.repository.ImageUrlRepostiory;
 

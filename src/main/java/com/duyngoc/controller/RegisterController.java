@@ -19,7 +19,7 @@ public class RegisterController {
 	private UserRepository userRepository;
 	
 	private static final int MAX=1000000;
-	@RequestMapping(value = "/user", method = RequestMethod.POST)
+	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<?> addUser(@RequestBody User user) {
 		try {
 			System.out.println(user.getName());

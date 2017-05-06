@@ -36,6 +36,7 @@ public class LoginController {
 		
 	}
 	
+	@RequestMapping(value="/currentUser",method=RequestMethod.GET)
 	public ResponseEntity<?> getCurrentUser(){
 		try {
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();

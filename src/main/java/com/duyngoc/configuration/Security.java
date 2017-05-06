@@ -8,19 +8,15 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 import com.duyngoc.service.UserDetailsServices;
-
-
-
-
 
 @Configuration
 @EnableWebSecurity
 
-@EnableGlobalMethodSecurity(prePostEnabled = true,securedEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class Security extends WebSecurityConfigurerAdapter {
-
 
 	@Autowired
 	private UserDetailsServices userDetailsService;
@@ -34,25 +30,17 @@ public class Security extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 
 		http.httpBasic().and().authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-		//.antMatchers("/api/search/**").permitAll()
-		//.antMatchers("/api/user").permitAll()
-		//.antMatchers("/api/employee").access("hasRole('EMPLOYEE')||hasRole('ADMIN')")
-		//.antMatchers("/api/**").access("hasRole('ADMIN')")
-		.antMatchers("/registerUser").permitAll()
-		.antMatchers("/api/**").permitAll()
-		//.antMatchers("/login","/api.employee/**").authenticated()
-		
-		.and().logout()
-        .logoutUrl("/logout")
-        .clearAuthentication(true)
-        .invalidateHttpSession( true )
-        .deleteCookies("JSESSIONID").permitAll()
-        .logoutSuccessUrl("/")
-     
-        
-       .and().csrf().disable()
-		;
-		
+				// .antMatchers("/api/search/**").permitAll()
+				// .antMatchers("/api/user").permitAll()
+				// .antMatchers("/api/employee").access("hasRole('EMPLOYEE')||hasRole('ADMIN')")
+				// .antMatchers("/api/**").access("hasRole('ADMIN')")
+				.antMatchers("/registerUser").permitAll().antMatchers("/api/**").permitAll()
+				// .antMatchers("/login","/api.employee/**").authenticated()
+
+				.and().logout().logoutUrl("/logout").clearAuthentication(true).invalidateHttpSession(true)
+				.deleteCookies("JSESSIONID").permitAll().logoutSuccessUrl("/").and().csrf()
+		        .disable();
+
 	}
 
 }

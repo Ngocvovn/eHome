@@ -99,4 +99,5 @@ public class ApartmentServiceTest {
 		assertEquals(1, apartments.size());
 	}
 	
+	
 }

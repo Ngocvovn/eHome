@@ -17,7 +17,7 @@ import com.duyngoc.model.Apartment;
 import com.duyngoc.service.ApartmentService;
 @RestController
 @RequestMapping("/api")
-@CrossOrigin
+
 public class ApartmentController {
 	
 	@Autowired
@@ -47,6 +47,17 @@ public class ApartmentController {
 			// TODO: handle exception
 			e.printStackTrace();
 			return new ResponseEntity<String>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@RequestMapping(value="/apartment/{id}", method= RequestMethod.DELETE)
+	public ResponseEntity<?> deleteApartment(@PathVariable Long id){
+		try {
+			service.delete(id);
+			return new ResponseEntity(HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return new ResponseEntity<Exception>(e, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,7 +17,6 @@ import com.duyngoc.repository.UserRepository;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin
 public class UserController {
 	private static final int MAX = 1000000;
 
@@ -69,6 +69,17 @@ public class UserController {
 		} catch (Exception e) {
 			// TODO: handle exception
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@RequestMapping(value="/users/{id}", method= RequestMethod.DELETE)
+	public ResponseEntity<?> deleteApartment(@PathVariable Long id){
+		try {
+			userRepo.delete(id);
+			return new ResponseEntity(HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return new ResponseEntity<Exception>(e, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 

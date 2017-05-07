@@ -1,7 +1,9 @@
 package com.duyngoc.service;
 
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -13,9 +15,9 @@ import org.springframework.stereotype.Service;
 
 import com.duyngoc.model.Apartment;
 import com.duyngoc.model.ImageUrl;
-import com.duyngoc.model.User;
 import com.duyngoc.repository.ApartmentRepository;
 import com.duyngoc.repository.ImageUrlRepostiory;
+import com.duyngoc.repository.UserRepository;
 
 @Service
 public class ApartmentService {
@@ -87,5 +89,10 @@ public class ApartmentService {
 		}
 		return "no";
 	}
+	public void delete(Long id){
+		imageRepository.delete(aparmentRepository.findOne(id).getImageUrls());
+		aparmentRepository.delete(id);
+	}
+	
 
 }

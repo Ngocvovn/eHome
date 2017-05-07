@@ -16,15 +16,15 @@ import com.duyngoc.model.User;
 import com.duyngoc.repository.UserRepository;
 
 @RestController
-@RequestMapping("/api")
-@CrossOrigin
+@RequestMapping("/ehome")
+
 public class LoginController {
 	
 	@Autowired
 	private UserRepository userRepository;
 	
 
-	@RequestMapping(value="/login",method=RequestMethod.POST)
+	@RequestMapping(value="/login",method=RequestMethod.GET)
 	public ResponseEntity<?> login(Principal principal){
 		try {
 			System.out.println("login "+ principal.getName());

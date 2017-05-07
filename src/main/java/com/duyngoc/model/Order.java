@@ -2,12 +2,24 @@ package com.duyngoc.model;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+
+@Entity
+@Table(name="submition")
 public class Order {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private Long userId;
 	private Long apartmentId;
 	private boolean approved;
 	private Date date;
+	private String additionalInfomation;
 	public Order(){}
 	
 	public Order(Long userId,Long appartmentId){
@@ -53,6 +65,14 @@ public class Order {
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+
+	public String getAdditionalInfomation() {
+		return additionalInfomation;
+	}
+
+	public void setAdditionalInfomation(String additionalInfomation) {
+		this.additionalInfomation = additionalInfomation;
 	}
 	
 }

@@ -50,7 +50,9 @@ public class ApartmentService {
 	public Apartment save(Apartment apartment) {
 		imageRepository.save(apartment.getImageUrls());
 		apartment.setImageUrls(null);
-		return aparmentRepository.save(apartment);
+		aparmentRepository.save(apartment);
+		apartment.setImageUrls(imageRepository.findByApartmentId(apartment.getApartmentId()));
+		return apartment;
 	}
 	
 	public Iterable<Apartment> saveList(List apartments){

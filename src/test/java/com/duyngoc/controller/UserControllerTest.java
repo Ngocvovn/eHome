@@ -94,7 +94,7 @@ public class UserControllerTest {
 		User user = userRepository.findByUsername("vo");
 		System.out.println(user.getUsername() + user.getId());
 		user.setUsername("jack");
-		ResponseEntity<User> entity = this.testRestTemplate.postForEntity("http://localhost:" + port + "/api/users",
+		ResponseEntity<User> entity = this.testRestTemplate.postForEntity("http://localhost:" + port + "/api/private/users",
 				user, User.class);
 		User update = entity.getBody();
 		assertTrue(user.getId() == update.getId());
@@ -106,7 +106,7 @@ public class UserControllerTest {
 		User user = new User();
 		user.setId((long) 1000000);
 		user.setUsername("jim");
-		ResponseEntity<User> entity = this.testRestTemplate.postForEntity("http://localhost:" + port + "/api/employees",
+		ResponseEntity<User> entity = this.testRestTemplate.postForEntity("http://localhost:" + port + "/api/private/employees",
 				user, User.class);
 	}
 
@@ -115,7 +115,7 @@ public class UserControllerTest {
 		User user = new User();
 		user.setId((long) 1000000);
 		user.setUsername("jacklondon");
-		ResponseEntity<User> entity = this.testRestTemplate.postForEntity("http://localhost:" + port + "/api/employees",
+		ResponseEntity<User> entity = this.testRestTemplate.postForEntity("http://localhost:" + port + "/api/private/employees",
 				user, User.class);
 		
 		user = entity.getBody();

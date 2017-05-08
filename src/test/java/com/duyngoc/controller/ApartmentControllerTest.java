@@ -80,7 +80,7 @@ public class ApartmentControllerTest {
 	@Test
 	public void shouldReturn200() throws Exception{
 	
-		ResponseEntity<List> entity = this.testRestTemplate.getForEntity("http://localhost:"+port+"/api/apartment/ehome", List.class);
+		ResponseEntity<List> entity = this.testRestTemplate.getForEntity("http://localhost:"+port+"/api/private/apartment/ehome", List.class);
 		
 		assertEquals(HttpStatus.OK, entity.getStatusCode());
 		
@@ -88,13 +88,13 @@ public class ApartmentControllerTest {
 	
 	@Test
 	public void shouldReturnJson() throws Exception{
-		ResponseEntity<List> entity = this.testRestTemplate.getForEntity("http://localhost:"+port+"/api/apartment/ehome", List.class);
+		ResponseEntity<List> entity = this.testRestTemplate.getForEntity("http://localhost:"+port+"/api/private/apartment/ehome", List.class);
 		
 		assertTrue(entity.getHeaders().getContentType().toString().contains("application/json"));
 	}
 	@Test
 	public void returnListCorrectly() throws Exception{
-		ResponseEntity<List> entity = this.testRestTemplate.getForEntity("http://localhost:"+port+"/api/apartment/ehome", List.class);
+		ResponseEntity<List> entity = this.testRestTemplate.getForEntity("http://localhost:"+port+"/api/private/apartment/ehome", List.class);
 		assertTrue(entity.getBody().size()==1);
 		assertTrue(entity.getBody().get(0).toString().contains("owner=ehome"));		
 		
@@ -103,7 +103,7 @@ public class ApartmentControllerTest {
 	@Test
 	public void createNewSuccefully(){
 		Apartment apartment =createApartmentForTest((long)2, "Helsinki", "ehome2");
-		ResponseEntity<Apartment> entity = testRestTemplate.postForEntity("http://localhost:"+port+"/api/apartment/ehome2", apartment, Apartment.class);
+		ResponseEntity<Apartment> entity = testRestTemplate.postForEntity("http://localhost:"+port+"/api/private/apartment/ehome2", apartment, Apartment.class);
 		assertNotNull(entity.getBody());
 		assertTrue(entity.getBody().getId()==2&&entity.getBody().getOwner().equals("ehome2"));	
 		assertEquals(entity.getStatusCode(), HttpStatus.OK);
@@ -112,7 +112,7 @@ public class ApartmentControllerTest {
 	@Test
 	public void updateSuccessfully() throws Exception{
 		Apartment apartment = createApartmentForTest((long)10, "Espoo", "ehome");
-		ResponseEntity<Apartment> entity = testRestTemplate.postForEntity("http://localhost:"+port+"/api/apartment/ehome", apartment, Apartment.class);
+		ResponseEntity<Apartment> entity = testRestTemplate.postForEntity("http://localhost:"+port+"/api/private/apartment/ehome", apartment, Apartment.class);
 		assertNotNull(entity.getBody());
 		assertTrue(entity.getBody().getCity().equals("Espoo"));
 	}

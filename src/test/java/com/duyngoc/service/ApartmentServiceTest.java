@@ -41,7 +41,7 @@ public class ApartmentServiceTest {
 		tes.setStreet("lintu");
 		Apartment apartment= apartmentService.save(tes);
 		assertEquals("lintu", apartment.getStreet());
-		assertNull(apartment.getImageUrls());
+		assertNotNull(apartment.getImageUrls());
 	}
 	
 	@Test

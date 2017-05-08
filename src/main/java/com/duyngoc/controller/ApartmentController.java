@@ -30,7 +30,7 @@ public class ApartmentController {
 			
 			
 			apartment.setPostDate(new Date());
-			service.save(apartment);
+			apartment=service.save(apartment);
 			return new ResponseEntity<Apartment>(apartment, HttpStatus.OK);
 		}
 		catch(Exception e){

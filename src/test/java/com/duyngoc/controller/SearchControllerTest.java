@@ -46,8 +46,9 @@ public class SearchControllerTest {
 	@Before
 	public void generateData() throws IOException, ClassNotFoundException {
 		
-
-		FileInputStream fileIn = new FileInputStream(env.getProperty("ehome.apartments.path"));
+		String location =env.getProperty("blackJack.apartments.path");
+		
+		FileInputStream fileIn = new FileInputStream(location);
 		ObjectInputStream in = new ObjectInputStream(fileIn);
 		List<Apartment> list = (ArrayList<Apartment>) in.readObject();
 		in.close();

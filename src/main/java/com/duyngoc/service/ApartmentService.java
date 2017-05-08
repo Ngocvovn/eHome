@@ -1,14 +1,13 @@
 package com.duyngoc.service;
 
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +16,6 @@ import com.duyngoc.model.Apartment;
 import com.duyngoc.model.ImageUrl;
 import com.duyngoc.repository.ApartmentRepository;
 import com.duyngoc.repository.ImageUrlRepostiory;
-import com.duyngoc.repository.UserRepository;
 
 @Service
 public class ApartmentService {
@@ -42,6 +40,7 @@ public class ApartmentService {
 	}
 
 	public List<Apartment> getApartmentsByOwner(String owner) {
+		
 		List<Apartment> apartments = aparmentRepository.findByOwner(owner);
 		addImagesOfApartment(apartments);
 		return apartments;
@@ -53,13 +52,19 @@ public class ApartmentService {
 		return aparmentRepository.save(apartment);
 	}
 	
+	public Iterable<Apartment> saveList(List apartments){
+		return aparmentRepository.save(apartments);
+	}
+	
+	
+	
 
-	public List<Apartment> customSearch(String city, String street, double minPrice, double maxPrice, int bedrooms,
+	public Set<Apartment> customSearch(String city, String street, double minPrice, double maxPrice, int bedrooms,
 			float bathrooms, float minArea, float maxArea, String garage) {
 		city = reformatParam(city);
 		street= reformatParam(street);
 		garage= formatGarage(garage);
-		List<Apartment> apartments = new ArrayList<>();
+		Set<Apartment> apartments = new TreeSet<>();
 		if (bedrooms >= 100 && bathrooms >= 100) {
 			apartments = aparmentRepository.searchResultWithoutRooms(city, street, minPrice, maxPrice, minArea, maxArea,
 					garage);
@@ -94,5 +99,23 @@ public class ApartmentService {
 		aparmentRepository.delete(id);
 	}
 	
+	public void saveApartments() {
+		String[] locations = {"D:/snake/apartments.txt","D:/snake/images.txt","D:/snake/users.txt"};
+		
+		try {
+
+			FileOutputStream fileOut = new FileOutputStream(locations[0]);
+			ObjectOutputStream out = new ObjectOutputStream(fileOut);
+
+			out.writeObject(aparmentRepository.findAll());
+			out.close();
+			fileOut.close();
+			System.out.printf("Serialized data is saved in " + locations[0]);
+
+		} catch (IOException i) {
+			i.printStackTrace();
+		}
+
+	}
 
 }

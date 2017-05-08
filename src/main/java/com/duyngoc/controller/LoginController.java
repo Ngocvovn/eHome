@@ -16,7 +16,7 @@ import com.duyngoc.model.User;
 import com.duyngoc.repository.UserRepository;
 
 @RestController
-@RequestMapping("/ehome")
+@RequestMapping("/api/public")
 
 public class LoginController {
 	
@@ -24,7 +24,7 @@ public class LoginController {
 	private UserRepository userRepository;
 	
 
-	@RequestMapping(value="/login",method=RequestMethod.GET)
+	@RequestMapping(value="/login",method=RequestMethod.POST)
 	public ResponseEntity<?> login(Principal principal){
 		try {
 			System.out.println("login "+ principal.getName());

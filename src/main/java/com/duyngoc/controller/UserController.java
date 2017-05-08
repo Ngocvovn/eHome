@@ -16,7 +16,7 @@ import com.duyngoc.model.User;
 import com.duyngoc.repository.UserRepository;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/private")
 public class UserController {
 	private static final int MAX = 1000000;
 

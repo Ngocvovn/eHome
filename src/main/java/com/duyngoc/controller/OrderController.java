@@ -14,7 +14,7 @@ import com.duyngoc.model.Order;
 import com.duyngoc.repository.OrderRepository;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/private")
 public class OrderController {
 
 	@Autowired

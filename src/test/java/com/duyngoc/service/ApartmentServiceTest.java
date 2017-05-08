@@ -5,6 +5,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -66,10 +68,10 @@ public class ApartmentServiceTest {
 		tes.setPrice(3000);
 		tes.setBedrooms(4);
 		apartmentService.save(tes);
-		List<Apartment> apartments = apartmentService.customSearch("Helsinki", "Lintu", 1000, 4000, 4,100,0,100000,"garage");
+		TreeSet<Apartment> apartments = (TreeSet<Apartment>) apartmentService.customSearch("Helsinki", "Lintu", 1000, 4000, 4,100,0,100000,"garage");
 		assertNotNull(apartments);
 		assertEquals(1, apartments.size());
-		assertEquals("Helsinki", apartments.get(0).getCity());
+		assertEquals("Helsinki", apartments.first().getCity());
 	}
 	
 	public void testCustomSearchDifferentBedrooms(){
@@ -81,7 +83,7 @@ public class ApartmentServiceTest {
 		tes.setParkingType("garage");
 		apartmentService.save(tes);
 		System.out.println(tes);
-		List<Apartment> apartments = apartmentService.customSearch("Helsinki", "Lintu", 1000, 4000, 4,100,0,100000,"garage");
+		Set<Apartment> apartments = apartmentService.customSearch("Helsinki", "Lintu", 1000, 4000, 4,100,0,100000,"garage");
 		assertNotNull(apartments);
 		assertEquals(0, apartments.size());
 	}
@@ -94,9 +96,38 @@ public class ApartmentServiceTest {
 		tes.setBedrooms(4);
 		tes.setParkingType("garage");
 		apartmentService.save(tes);
-		List<Apartment> apartments = apartmentService.customSearch("Helsinki", "Lintu",0, 4000, 4,100,0,100000,"Yes");
+		Set<Apartment> apartments = apartmentService.customSearch("Helsinki", "Lintu",0, 4000, 4,100,0,100000,"Yes");
 		assertNotNull(apartments);
 		assertEquals(1, apartments.size());
+	}
+	
+	@Test
+	public void reformatParams(){
+		String city ="SeaTtle";
+		assertEquals("seattle", apartmentService.reformatParam(city));
+	}
+	@Test
+	public void reformatParams2(){
+		String city ="seattle";
+		assertEquals("seattle", apartmentService.reformatParam(city));
+	}
+	
+	@Test
+	public void formatGarage(){
+		String garage = "Yes";
+		assertEquals("garage", apartmentService.formatGarage(garage));
+	}
+	
+	@Test
+	public void formatGarage2(){
+		String garage = "No";
+		assertEquals("no", apartmentService.formatGarage(garage));
+	}
+	
+	@Test
+	public void formatGarage3(){
+		String garage = "yes";
+		assertEquals("no", apartmentService.formatGarage(garage));
 	}
 	
 	

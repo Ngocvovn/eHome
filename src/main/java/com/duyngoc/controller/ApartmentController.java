@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.duyngoc.model.Apartment;
 import com.duyngoc.service.ApartmentService;
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/private")
 
 public class ApartmentController {
 	

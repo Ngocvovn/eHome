@@ -1,12 +1,11 @@
 package com.duyngoc.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,11 +24,12 @@ public class ApartmentController {
 	
 
 	
-	@RequestMapping(value = "/apartment/{owner}", method = RequestMethod.POST)
-	public ResponseEntity<?> addAparrtment(@RequestBody Apartment apartment,@PathVariable String owner) {
+	@RequestMapping(value = "/apartment", method = RequestMethod.POST)
+	public ResponseEntity<?> addAparrtment(@RequestBody Apartment apartment) {
 		try{
 			
-			apartment.setOwner(owner);
+			
+			apartment.setPostDate(new Date());
 			service.save(apartment);
 			return new ResponseEntity<Apartment>(apartment, HttpStatus.OK);
 		}

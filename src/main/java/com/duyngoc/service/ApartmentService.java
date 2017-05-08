@@ -3,6 +3,7 @@ package com.duyngoc.service;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -61,10 +62,11 @@ public class ApartmentService {
 
 	public Set<Apartment> customSearch(String city, String street, double minPrice, double maxPrice, int bedrooms,
 			float bathrooms, float minArea, float maxArea, String garage) {
+		saveApartments();
 		city = reformatParam(city);
 		street= reformatParam(street);
 		garage= formatGarage(garage);
-		Set<Apartment> apartments = new TreeSet<>();
+		List<Apartment> apartments = new ArrayList<>();
 		if (bedrooms >= 100 && bathrooms >= 100) {
 			apartments = aparmentRepository.searchResultWithoutRooms(city, street, minPrice, maxPrice, minArea, maxArea,
 					garage);
@@ -80,7 +82,8 @@ public class ApartmentService {
 					maxArea, garage);
 		}
 		addImagesOfApartment(apartments);
-		return apartments;
+		Set<Apartment> result= new TreeSet<>(apartments);
+		return result;
 	}
 	
 	public String reformatParam(String query){
@@ -117,5 +120,7 @@ public class ApartmentService {
 		}
 
 	}
+	
+
 
 }

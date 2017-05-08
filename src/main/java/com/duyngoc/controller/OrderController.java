@@ -38,7 +38,7 @@ public class OrderController {
 			return new ResponseEntity<Exception>(e, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	@RequestMapping(value="/orders}", method= RequestMethod.POST)
+	@RequestMapping(value="/orders", method= RequestMethod.POST)
 	public ResponseEntity<?> updateOrDelete(@RequestBody Order order){
 		try {
 			return new ResponseEntity<Order>(repository.save(order),HttpStatus.OK);
@@ -58,4 +58,7 @@ public class OrderController {
 			return new ResponseEntity<Exception>(e, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	
+	
 }

@@ -87,19 +87,6 @@ public class ApartmentServiceTest {
 		assertNotNull(apartments);
 		assertEquals(0, apartments.size());
 	}
-	@Test
-	public void testCustomSearchWithOutBedroom(){
-		Apartment tes = new Apartment();
-		tes.setCity("Helsinki");
-		tes.setStreet("Lintu");
-		tes.setPrice(3000);
-		tes.setBedrooms(4);
-		tes.setParkingType("garage");
-		apartmentService.save(tes);
-		Set<Apartment> apartments = apartmentService.customSearch("Helsinki", "Lintu",0, 4000, 4,100,0,100000,"Yes");
-		assertNotNull(apartments);
-		assertEquals(1, apartments.size());
-	}
 	
 	@Test
 	public void reformatParams(){

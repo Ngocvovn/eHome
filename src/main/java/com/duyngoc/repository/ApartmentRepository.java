@@ -15,25 +15,25 @@ public interface ApartmentRepository extends CrudRepository<Apartment, Long> {
 	@Query("select apartment from Apartment apartment where lower(apartment.city) like %?1% and lower(apartment.street) like %?2% AND"
 			+ " apartment.price>=?3 and apartment.price<=?4 and apartment.bedrooms=?5 and"
 			+ " apartment.lotSizeSqFt>=?6 and apartment.lotSizeSqFt<=?7 and lower(apartment.parkingType) like %?8%")
-	TreeSet<Apartment> searchResultWithBedrooms(String city, String street, double minPrice, double maxPrice, int bedrooms,
+	List<Apartment> searchResultWithBedrooms(String city, String street, double minPrice, double maxPrice, int bedrooms,
 			float minArea, float maxArea, String garage);
 
 	@Query("select apartment from Apartment apartment where lower(apartment.city) like %?1% and lower(apartment.street) like %?2% AND"
 			+ " apartment.price>=?3 and apartment.price<=?4 and apartment.bedrooms=?5 and apartment.bathrooms=?6"
 			+ " and apartment.lotSizeSqFt>=?7 and apartment.lotSizeSqFt<=?8 and lower(apartment.parkingType) like %?9%")
-	TreeSet<Apartment> searchResult(String city, String street, double minPrice, double maxPrice, int bedrooms,
+	List<Apartment> searchResult(String city, String street, double minPrice, double maxPrice, int bedrooms,
 			float bathrooms, float minArea, float maxArea, String garage);
 
 	@Query("select apartment from Apartment apartment where lower(apartment.city) like %?1% and lower(apartment.street) like %?2% AND"
 			+ " apartment.price>=?3 and apartment.price<=?4 and apartment.bathrooms=?5 and"
 			+ " apartment.lotSizeSqFt>=?6 and apartment.lotSizeSqFt<=?7 and lower(apartment.parkingType) like %?8%")
-	TreeSet<Apartment> searchResultWithBathrooms(String city, String street, double minPrice, double maxPrice,
+	List<Apartment> searchResultWithBathrooms(String city, String street, double minPrice, double maxPrice,
 			float bathrooms, float minArea, float maxArea, String garage);
 
 	@Query("select apartment from Apartment apartment where lower(apartment.city) like %?1% and lower(apartment.street) like %?2% "
 			+ "AND apartment.price>=?3 and apartment.price<=?4 and apartment.lotSizeSqFt>=?5"
 			+ " and apartment.lotSizeSqFt<=?6 and lower(apartment.parkingType) like %?7%")
-	TreeSet<Apartment> searchResultWithoutRooms(String city, String street, double minPrice, double maxPrice,
+	List<Apartment> searchResultWithoutRooms(String city, String street, double minPrice, double maxPrice,
 			float minArea, float maxArea, String garage);
 
 }

@@ -3,6 +3,7 @@ package com.duyngoc.model;
 
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -49,6 +50,7 @@ public class Apartment implements Comparable<Apartment>, Serializable{
 	private String viewPoint;
 	private String parkingType;
 	private String heatingSourcesGas;
+	private Date postDate;
 	public Apartment(){
 		
 	}
@@ -104,6 +106,12 @@ public class Apartment implements Comparable<Apartment>, Serializable{
 	@Override
 	public int compareTo(Apartment o) {
 		// TODO Auto-generated method stub
+		if(postDate.before(o.getPostDate())){
+			return 1;
+		}
+		else if(postDate.after(o.getPostDate())){
+			return -1;
+		}
 		return 1;
 	}
 
@@ -232,6 +240,14 @@ public class Apartment implements Comparable<Apartment>, Serializable{
 
 	public void setLotSizeSqFt(float lotSizeSqFt) {
 		this.lotSizeSqFt = lotSizeSqFt;
+	}
+
+	public Date getPostDate() {
+		return postDate;
+	}
+
+	public void setPostDate(Date postDate) {
+		this.postDate = postDate;
 	}
 
 	

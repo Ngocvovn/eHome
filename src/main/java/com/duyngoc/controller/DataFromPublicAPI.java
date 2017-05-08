@@ -1,6 +1,7 @@
 package com.duyngoc.controller;
 
 import java.io.IOException;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -53,6 +54,7 @@ public class DataFromPublicAPI {
 		apartment.setCity(city);
 		apartment.setStreet(street);
 		apartment.setOwner("eHome");
+		apartment.setPostDate(new Date());
 		getDetailsOfApartment(apartment);
 		return apartment.getApartmentId()+apartment.getRooms();
 	}

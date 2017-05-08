@@ -17,6 +17,7 @@ import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.core.env.Environment;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.duyngoc.model.Apartment;
@@ -29,6 +30,9 @@ public class SearchControllerTest {
 	private static final long serialVersionUID = 1L;
 	@LocalServerPort
 	int port;
+	
+	@Autowired
+	private Environment env;
 
 
 	private ApartmentService service;
@@ -43,7 +47,7 @@ public class SearchControllerTest {
 	public void generateData() throws IOException, ClassNotFoundException {
 		
 
-		FileInputStream fileIn = new FileInputStream("D:/snake/apartments.txt");
+		FileInputStream fileIn = new FileInputStream(env.getProperty("ehome.apartments.path"));
 		ObjectInputStream in = new ObjectInputStream(fileIn);
 		List<Apartment> list = (ArrayList<Apartment>) in.readObject();
 		in.close();

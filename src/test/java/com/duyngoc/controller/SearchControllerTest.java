@@ -169,9 +169,32 @@ public class SearchControllerTest {
 				.getForEntity("http://localhost:" + port + "/api/public/search?street=1525 TayLor Ave", List.class);
 		assertEquals(HttpStatus.OK, entity.getStatusCode());
 		boolean check = true;
+		for(int i =0;i<entity.getBody().size();i++){
+			Map a= (Map) entity.getBody().get(i);
+			if(!a.get("city").toString().contains("1525 TayLor Ave")){
+				check=false;
+			}
+		}
 		
 		assertTrue(entity.getBody().size()>0);
 	}
+	
+	@Test
+	public void searchByStreet(){
+		ResponseEntity<List> entity = this.testRestTemplate
+				.getForEntity("http://localhost:" + port + "/api/public/search?street=Ave", List.class);
+		assertEquals(HttpStatus.OK, entity.getStatusCode());
+		boolean check = true;
+		for(int i =0;i<entity.getBody().size();i++){
+			Map a= (Map) entity.getBody().get(i);
+			if(!a.get("city").toString().contains("Ave")){
+				check=false;
+			}
+		}
+		
+		assertTrue(entity.getBody().size()>0);
+	}
+
 
 	
 	

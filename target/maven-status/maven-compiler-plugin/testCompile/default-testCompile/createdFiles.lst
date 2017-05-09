@@ -1,0 +1,8 @@
+com\duyngoc\controller\SearchControllerTest.class
+com\duyngoc\controller\OrderControllerTest.class
+com\duyngoc\controller\RegisterControllerTest.class
+com\duyngoc\BlackJackApplicationTests.class
+com\duyngoc\controller\UserControllerTest.class
+com\duyngoc\service\UserServiceTest.class
+com\duyngoc\service\ApartmentServiceTest.class
+com\duyngoc\controller\ApartmentControllerTest.class

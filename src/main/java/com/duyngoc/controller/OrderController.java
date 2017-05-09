@@ -1,4 +1,5 @@
 package com.duyngoc.controller;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,7 @@ public class OrderController {
 	@RequestMapping(value="/orders", method= RequestMethod.POST)
 	public ResponseEntity<?> updateOrDelete(@RequestBody Order order){
 		try {
+			order.setDate(new Date());
 			return new ResponseEntity<Order>(repository.save(order),HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO: handle exception

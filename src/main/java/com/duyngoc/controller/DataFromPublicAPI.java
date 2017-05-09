@@ -2,6 +2,7 @@ package com.duyngoc.controller;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,13 +39,12 @@ public class DataFromPublicAPI {
 			}
 		}
 
-	
 		return zpid;
 	}
 
 	@RequestMapping(value = "/address/{city}/{street}", method = RequestMethod.GET)
 	public String getApartmentFromPublicAPI(@PathVariable String city, @PathVariable String street) throws IOException {
-		String uri = "http://www.zillow.com/webservice/GetSearchResults.htm?zws-id="+ID+"&address=" + street
+		String uri = "http://www.zillow.com/webservice/GetSearchResults.htm?zws-id=" + ID + "&address=" + street
 				+ "&citystatezip=" + city;
 
 		RestTemplate restTemplate = new RestTemplate();
@@ -55,18 +55,21 @@ public class DataFromPublicAPI {
 		apartment.setStreet(street);
 		apartment.setOwner("eHome");
 		apartment.setPostDate(new Date());
+		Random rand = new Random();
+		int price = rand.nextInt(8000) + 2000;
+		apartment.setPrice(price);
 		getDetailsOfApartment(apartment);
-		return apartment.getApartmentId()+apartment.getRooms();
+		return apartment.getApartmentId() + apartment.getRooms();
 	}
 
 	@RequestMapping(value = "/apartment", method = RequestMethod.GET)
 	public Apartment getDetailsOfApartment(Apartment apartment) throws IOException {
 		String uri = "http://www.zillow.com/webservice/GetUpdatedPropertyDetails.htm?zws-id=X1-ZWz1frvxkp0xzf_94p25&zpid="
 				+ apartment.getApartmentId();
-		
+
 		RestTemplate restTemplate = new RestTemplate();
 		String xml = restTemplate.getForObject(uri, String.class);
-		System.out.println(apartment.getApartmentId()+xml);
+		System.out.println(apartment.getApartmentId() + xml);
 		if (extractDetailOfApartment(apartment, xml)) {
 			apartment.setAvailable(true);
 			apartRepo.save(apartment);
@@ -82,62 +85,53 @@ public class DataFromPublicAPI {
 				System.out.println("no accessiable");
 				return false;
 			} else if (split[i].equals("<url")) {
-			
+
 				ImageUrl url = new ImageUrl();
 				url.setApartmentId(apartment.getApartmentId());
 				url.setUrl(split[i + 1].split("<")[0]);
 				imageRepo.save(url);
-			}
-			else if (split[i].equals("<longitude")) {
-			
+			} else if (split[i].equals("<longitude")) {
+
 				apartment.setLongitude(split[i + 1].split("<")[0]);
-			} 
-			else if (split[i].equals("<latitude")) {
-				
+			} else if (split[i].equals("<latitude")) {
+
 				apartment.setLatitude(split[i + 1].split("<")[0]);
-			} 
-			else if (split[i].equals("<rooms")) {
-				
+			} else if (split[i].equals("<rooms")) {
+
 				apartment.setRooms(split[i + 1].split("<")[0]);
-			} 
-			else if (split[i].equals("<parkingType")) {
-				
-				apartment.setParkingType(split[i + 1].split("<")[0]);
-			} 
-			else if (split[i].equals("<bedrooms")) {
-				
+			} else if (split[i].equals("<parkingType")) {
+				if (split[i + 1].split("<")[0].contains("-")) {
+					apartment.setParkingType(split[i + 1].split("<")[0]);
+				}
+				else{
+					apartment.setParkingType("No details");
+				}
+			} else if (split[i].equals("<bedrooms")) {
+
 				apartment.setBedrooms(Integer.parseInt(split[i + 1].split("<")[0]));
-			} 
-			else if (split[i].equals("<bathrooms")) {
-				
+			} else if (split[i].equals("<bathrooms")) {
+
 				apartment.setBathrooms(Float.parseFloat(split[i + 1].split("<")[0]));
-			} 
-			else if (split[i].equals("<finishedSqFt")) {
-				
+			} else if (split[i].equals("<finishedSqFt")) {
+
 				apartment.setFinishedSqFt(Float.parseFloat(split[i + 1].split("<")[0]));
-			}
-			else if (split[i].equals("<lotSizeSqFt")) {
-	
+			} else if (split[i].equals("<lotSizeSqFt")) {
+
 				apartment.setLotSizeSqFt(Float.parseFloat(split[i + 1].split("<")[0]));
-			}
-			else if (split[i].equals("<yearBuilt")) {
-			
+			} else if (split[i].equals("<yearBuilt")) {
+
 				apartment.setYearBuilt(split[i + 1].split("<")[0]);
-			} 
-			else if (split[i].equals("<yearUpdated")) {
-				
+			} else if (split[i].equals("<yearUpdated")) {
+
 				apartment.setYearUpdated(split[i + 1].split("<")[0]);
-			} 
-			else if (split[i].equals("<numFloors")) {
-				
+			} else if (split[i].equals("<numFloors")) {
+
 				apartment.setNumFloors(split[i + 1].split("<")[0]);
-			}
-			else if (split[i].equals("<heatingSources")) {
-			
+			} else if (split[i].equals("<heatingSources")) {
+
 				apartment.setHeatingSourcesGas(split[i + 1].split("<")[0]);
-			}
-			else if (split[i].equals("<view")) {
-				
+			} else if (split[i].equals("<view")) {
+
 				apartment.setViewPoint(split[i + 1].split("<")[0]);
 			}
 		}

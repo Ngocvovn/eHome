@@ -1,8 +1,8 @@
 package com.duyngoc.service;
 
-import java.io.FileOutputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -11,6 +11,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 import com.duyngoc.model.Apartment;
@@ -20,6 +21,7 @@ import com.duyngoc.repository.ImageUrlRepostiory;
 
 @Service
 public class ApartmentService {
+	
 
 	@Autowired
 	private ApartmentRepository aparmentRepository;
@@ -64,7 +66,6 @@ public class ApartmentService {
 
 	public Set<Apartment> customSearch(String city, String street, double minPrice, double maxPrice, int bedrooms,
 			float bathrooms, float minArea, float maxArea, String garage) {
-		saveApartments();
 		city = reformatParam(city);
 		street= reformatParam(street);
 		garage= formatGarage(garage);
@@ -104,25 +105,34 @@ public class ApartmentService {
 		aparmentRepository.delete(id);
 	}
 	
+	@Autowired
+	private Environment env;
+	
 	public void saveApartments() {
 		String[] locations = {"D:/snake/apartments.txt","D:/snake/images.txt","D:/snake/users.txt"};
 		
 		try {
+			String location = env.getProperty("blackJack.images.path");
+			FileInputStream fileOut = new FileInputStream(location);
+			ObjectInputStream out = new ObjectInputStream(fileOut);
 
-			FileOutputStream fileOut = new FileOutputStream(locations[0]);
-			ObjectOutputStream out = new ObjectOutputStream(fileOut);
-
-			out.writeObject(aparmentRepository.findAll());
+			List<ImageUrl> images = (List<ImageUrl>) out.readObject();
 			out.close();
 			fileOut.close();
-			System.out.printf("Serialized data is saved in " + locations[0]);
+			for(ImageUrl a: images){
+				System.out.println(a.getApartmentId());
+				//imageRepository.save(a);
+			}
+			System.out.printf("Serialized data is saved in " + location+images.size());
 
 		} catch (IOException i) {
 			i.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 	}
-	
 
 
 }

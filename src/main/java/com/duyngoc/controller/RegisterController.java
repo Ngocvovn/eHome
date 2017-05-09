@@ -22,7 +22,6 @@ public class RegisterController {
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<?> addUser(@RequestBody User user) {
 		try {
-			System.out.println(user.getName());
 			if (userRepository.findByUsername(user.getUsername()) != null && user.getId() == MAX) {
 				return new ResponseEntity<Exception>(new IllegalArgumentException(), HttpStatus.NOT_ACCEPTABLE);
 			}

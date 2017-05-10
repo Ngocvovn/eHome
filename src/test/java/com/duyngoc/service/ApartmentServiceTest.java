@@ -101,7 +101,7 @@ public class ApartmentServiceTest {
 	
 	@Test
 	public void formatGarage(){
-		String garage = "Yes";
+		String garage = "yes";
 		assertEquals("garage", apartmentService.formatGarage(garage));
 	}
 	
@@ -113,7 +113,7 @@ public class ApartmentServiceTest {
 	
 	@Test
 	public void formatGarage3(){
-		String garage = "yes";
+		String garage = "Yes";
 		assertEquals("no", apartmentService.formatGarage(garage));
 	}
 	

@@ -43,7 +43,7 @@ public class SearchController {
 			@RequestParam(name = "bathrooms", required = false, defaultValue = "100") float bathrooms,
 			@RequestParam(name = "minArea", required = false, defaultValue = "0") float minArea,
 			@RequestParam(name = "maxArea", required = false, defaultValue = "1000000") float maxArea,
-			@RequestParam(name = "garage", required = false, defaultValue = "Yes") String garage) {
+			@RequestParam(name = "garage", required = false, defaultValue = "yes") String garage) {
 		try {
 
 			return new ResponseEntity<Set<Apartment>>(service.customSearch(city, street, minPrice, maxPrice, bedrooms,

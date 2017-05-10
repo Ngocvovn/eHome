@@ -33,7 +33,7 @@ public class Security extends WebSecurityConfigurerAdapter {
 				// .antMatchers("/api/**").access("hasRole('ADMIN')")
 
 				.antMatchers("/api/public/**").permitAll()
-				.antMatchers("/api/private/**").authenticated()
+				.antMatchers("/api/private/**").permitAll()
 				.and().httpBasic().and().logout().logoutUrl("/logout").clearAuthentication(true)
 				.invalidateHttpSession(true).deleteCookies("JSESSIONID").permitAll().logoutSuccessUrl("/").and().csrf()
 				.disable();

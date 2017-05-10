@@ -8,33 +8,39 @@ import static org.junit.Assert.assertTrue;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.annotation.ServletSecurity;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.embedded.LocalServerPort;
+import org.springframework.boot.test.autoconfigure.web.client.AutoConfigureWebClient;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.duyngoc.model.Apartment;
+import com.duyngoc.model.User;
+import com.duyngoc.repository.UserRepository;
 import com.duyngoc.service.ApartmentService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment=WebEnvironment.RANDOM_PORT)
-
 public class ApartmentControllerTest {
 	
 	@LocalServerPort
 	int port;
 	
 	@Autowired
-	ApartmentService service;
+	private ApartmentService service;
+
 	
 	@Autowired
 	private TestRestTemplate testRestTemplate;
@@ -79,6 +85,7 @@ public class ApartmentControllerTest {
 	
 	@Test
 	public void shouldReturn200() throws Exception{
+
 	
 		ResponseEntity<List> entity = this.testRestTemplate.getForEntity("http://localhost:"+port+"/api/private/apartment/ehome", List.class);
 		

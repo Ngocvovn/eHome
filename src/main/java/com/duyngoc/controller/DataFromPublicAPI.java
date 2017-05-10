@@ -102,8 +102,7 @@ public class DataFromPublicAPI {
 			} else if (split[i].equals("<parkingType")) {
 				if (split[i + 1].split("<")[0].contains("-")) {
 					apartment.setParkingType(split[i + 1].split("<")[0]);
-				}
-				else{
+				} else {
 					apartment.setParkingType("No details");
 				}
 			} else if (split[i].equals("<bedrooms")) {

@@ -14,44 +14,42 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.duyngoc.model.Apartment;
 import com.duyngoc.service.ApartmentService;
+
 @RestController
 @RequestMapping("/api/private")
 
 public class ApartmentController {
-	
+
 	@Autowired
 	private ApartmentService service;
-	
 
-	
 	@RequestMapping(value = "/apartment", method = RequestMethod.POST)
 	public ResponseEntity<?> addAparrtment(@RequestBody Apartment apartment) {
-		try{
-			
-			
-			apartment.setPostDate(new Date());
-			apartment=service.save(apartment);
-			return new ResponseEntity<Apartment>(apartment, HttpStatus.OK);
-		}
-		catch(Exception e){
-			return new ResponseEntity<String>("can not save please check again"+ e.getMessage(), HttpStatus.BAD_REQUEST);
-		}
-		
-		
-	}
-	@RequestMapping(value = "/apartment/{owner}", method = RequestMethod.GET)
-	public ResponseEntity<?> getApartmentofOwner(@PathVariable String owner){
 		try {
-			return new ResponseEntity<List<Apartment>>(service.getApartmentsByOwner(owner),HttpStatus.OK);
+
+			apartment.setPostDate(new Date());
+			apartment = service.save(apartment);
+			return new ResponseEntity<Apartment>(apartment, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<String>("can not save please check again" + e.getMessage(),
+					HttpStatus.BAD_REQUEST);
+		}
+
+	}
+
+	@RequestMapping(value = "/apartment/{owner}", method = RequestMethod.GET)
+	public ResponseEntity<?> getApartmentofOwner(@PathVariable String owner) {
+		try {
+			return new ResponseEntity<List<Apartment>>(service.getApartmentsByOwner(owner), HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-			return new ResponseEntity<String>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
-	@RequestMapping(value="/apartment/{id}", method= RequestMethod.DELETE)
-	public ResponseEntity<?> deleteApartment(@PathVariable Long id){
+
+	@RequestMapping(value = "/apartment/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<?> deleteApartment(@PathVariable Long id) {
 		try {
 			service.delete(id);
 			return new ResponseEntity(HttpStatus.OK);
@@ -60,6 +58,5 @@ public class ApartmentController {
 			return new ResponseEntity<Exception>(e, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-
 
 }

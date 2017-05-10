@@ -1,6 +1,5 @@
 package com.duyngoc.service;
 
-
 import java.util.HashSet;
 
 import java.util.Set;
@@ -22,21 +21,18 @@ public class UserDetailsServices implements UserDetailsService {
 	@Autowired
 	private UserRepository userRepository;
 
-	
-
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
 		User user = userRepository.findByUsername(username);
 
-		if (user==null) {
+		if (user == null) {
 			throw new UsernameNotFoundException("not found");
 		}
-		
+
 		Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
 		grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole()));
 		System.out.println(user.getUsername() + "   " + user.getRole());
-		
 
 		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
 				grantedAuthorities);

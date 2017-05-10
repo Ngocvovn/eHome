@@ -1,4 +1,5 @@
 package com.duyngoc.controller;
+
 import java.util.Date;
 import java.util.List;
 
@@ -20,38 +21,41 @@ public class OrderController {
 
 	@Autowired
 	private OrderRepository repository;
-	@RequestMapping(value="/orders", method= RequestMethod.GET)
-	public ResponseEntity<?> getOrders(){
+
+	@RequestMapping(value = "/orders", method = RequestMethod.GET)
+	public ResponseEntity<?> getOrders() {
 		try {
-			return new ResponseEntity<List<Order>>((List<Order>)repository.findAll(), HttpStatus.OK);
+			return new ResponseEntity<List<Order>>((List<Order>) repository.findAll(), HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO: handle exception
 			return new ResponseEntity<Exception>(e, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		
+
 	}
-	@RequestMapping(value="/orders/{userId}", method= RequestMethod.GET)
-	public ResponseEntity<?> getOrderByOwner(@PathVariable Long userId){
+
+	@RequestMapping(value = "/orders/{userId}", method = RequestMethod.GET)
+	public ResponseEntity<?> getOrderByOwner(@PathVariable Long userId) {
 		try {
-			return new ResponseEntity<List<Order>>(repository.findByUserId(userId),HttpStatus.OK);
+			return new ResponseEntity<List<Order>>(repository.findByUserId(userId), HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO: handle exception
 			return new ResponseEntity<Exception>(e, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	@RequestMapping(value="/orders", method= RequestMethod.POST)
-	public ResponseEntity<?> updateOrDelete(@RequestBody Order order){
+
+	@RequestMapping(value = "/orders", method = RequestMethod.POST)
+	public ResponseEntity<?> updateOrDelete(@RequestBody Order order) {
 		try {
 			order.setDate(new Date());
-			return new ResponseEntity<Order>(repository.save(order),HttpStatus.OK);
+			return new ResponseEntity<Order>(repository.save(order), HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO: handle exception
 			return new ResponseEntity<Exception>(e, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
-	@RequestMapping(value="/orders/{id}", method= RequestMethod.DELETE)
-	public ResponseEntity<?> deleteApartment(@PathVariable Long id){
+
+	@RequestMapping(value = "/orders/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<?> deleteApartment(@PathVariable Long id) {
 		try {
 			repository.delete(id);
 			return new ResponseEntity(HttpStatus.OK);
@@ -60,7 +64,5 @@ public class OrderController {
 			return new ResponseEntity<Exception>(e, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
-	
-	
+
 }

@@ -45,7 +45,6 @@ public class SearchController {
 			@RequestParam(name = "maxArea", required = false, defaultValue = "1000000") float maxArea,
 			@RequestParam(name = "garage", required = false, defaultValue = "Yes") String garage) {
 		try {
-			
 
 			return new ResponseEntity<Set<Apartment>>(service.customSearch(city, street, minPrice, maxPrice, bedrooms,
 					bathrooms, minArea, maxArea, garage), HttpStatus.OK);
@@ -56,8 +55,5 @@ public class SearchController {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-
-	
-
 
 }

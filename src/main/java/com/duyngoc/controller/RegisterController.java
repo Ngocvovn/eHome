@@ -14,11 +14,12 @@ import com.duyngoc.repository.UserRepository;
 @RestController
 @RequestMapping("api/public/register")
 public class RegisterController {
-	
+
 	@Autowired
 	private UserRepository userRepository;
-	
-	private static final int MAX=1000000;
+
+	private static final int MAX = 1000000;
+
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<?> addUser(@RequestBody User user) {
 		try {

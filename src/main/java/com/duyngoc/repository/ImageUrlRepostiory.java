@@ -8,6 +8,5 @@ import java.util.List;
 
 public interface ImageUrlRepostiory extends CrudRepository<ImageUrl, Long> {
 
-	
 	List<ImageUrl> findByApartmentId(String aparmentid);
 }

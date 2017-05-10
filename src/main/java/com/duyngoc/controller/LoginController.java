@@ -19,25 +19,24 @@ import com.duyngoc.repository.UserRepository;
 @RequestMapping("/api/public")
 
 public class LoginController {
-	
+
 	@Autowired
 	private UserRepository userRepository;
-	
 
-	@RequestMapping(value="/login",method=RequestMethod.POST)
-	public ResponseEntity<?> login(Principal principal){
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public ResponseEntity<?> login(Principal principal) {
 		try {
-			System.out.println("login "+ principal.getName());
+			System.out.println("login " + principal.getName());
 			return new ResponseEntity<User>(userRepository.findByUsername(principal.getName()), HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO: handle exception
-			return new ResponseEntity<String>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		
+
 	}
-	
-	@RequestMapping(value="/currentUser",method=RequestMethod.GET)
-	public ResponseEntity<?> getCurrentUser(){
+
+	@RequestMapping(value = "/currentUser", method = RequestMethod.GET)
+	public ResponseEntity<?> getCurrentUser() {
 		try {
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
@@ -49,7 +48,5 @@ public class LoginController {
 			return new ResponseEntity<Exception>(e, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
-	
 
 }

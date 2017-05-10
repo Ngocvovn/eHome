@@ -8,9 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
 @Entity
-@Table(name="submition")
+@Table(name = "submition")
 public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,11 +19,13 @@ public class Order {
 	private boolean approved;
 	private Date date;
 	private String additionalInfomation;
-	public Order(){}
-	
-	public Order(Long userId,Long appartmentId){
-		this.userId=userId;
-		this.apartmentId=appartmentId;
+
+	public Order() {
+	}
+
+	public Order(Long userId, Long appartmentId) {
+		this.userId = userId;
+		this.apartmentId = appartmentId;
 	}
 
 	public Long getId() {
@@ -74,5 +75,5 @@ public class Order {
 	public void setAdditionalInfomation(String additionalInfomation) {
 		this.additionalInfomation = additionalInfomation;
 	}
-	
+
 }

@@ -11,10 +11,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
 @Entity
 @Table(name = "imageUrl")
-public class ImageUrl implements  Serializable {
+public class ImageUrl implements Serializable {
 	/**
 	 * 
 	 */
@@ -24,7 +23,7 @@ public class ImageUrl implements  Serializable {
 	private Long id;
 	private String url;
 	private String apartmentId;
-	
+
 	public String getApartmentId() {
 		return apartmentId;
 	}
@@ -68,6 +67,4 @@ public class ImageUrl implements  Serializable {
 		this.apartment = apartment;
 	}
 
-
 }
-

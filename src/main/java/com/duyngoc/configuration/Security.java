@@ -13,7 +13,6 @@ import com.duyngoc.service.UserDetailsServices;
 @Configuration
 @EnableWebSecurity
 
-
 public class Security extends WebSecurityConfigurerAdapter {
 
 	@Autowired
@@ -32,15 +31,12 @@ public class Security extends WebSecurityConfigurerAdapter {
 				// .antMatchers("/api/user").permitAll()
 				// .antMatchers("/api/employee").access("hasRole('EMPLOYEE')||hasRole('ADMIN')")
 				// .antMatchers("/api/**").access("hasRole('ADMIN')")
-				.antMatchers("/registerUser").permitAll()
-				.antMatchers("/api/**").permitAll()
-				// .antMatchers("/login","/api.employee/**").authenticated()
-		
-				.and()
-				.httpBasic()
-				.and().logout().logoutUrl("/logout").clearAuthentication(true).invalidateHttpSession(true)
-				.deleteCookies("JSESSIONID").permitAll().logoutSuccessUrl("/").and().csrf()
-		        .disable();
+
+				.antMatchers("/api/public/**").permitAll()
+				.antMatchers("/api/private/**").authenticated()
+				.and().httpBasic().and().logout().logoutUrl("/logout").clearAuthentication(true)
+				.invalidateHttpSession(true).deleteCookies("JSESSIONID").permitAll().logoutSuccessUrl("/").and().csrf()
+				.disable();
 
 	}
 

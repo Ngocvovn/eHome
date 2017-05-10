@@ -22,21 +22,21 @@ public class UserController {
 
 	@Autowired
 	private UserRepository userRepo;
-	
-	@RequestMapping(value="/users", method= RequestMethod.GET)
-	public ResponseEntity<?> getAllUsers(){
+
+	@RequestMapping(value = "/users", method = RequestMethod.GET)
+	public ResponseEntity<?> getAllUsers() {
 		try {
-			return new ResponseEntity<List<User>>(userRepo.findByRole("ROLE_USER"),HttpStatus.OK);
+			return new ResponseEntity<List<User>>(userRepo.findByRole("ROLE_USER"), HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO: handle exception
 			return new ResponseEntity<Exception>(e, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
-	@RequestMapping(value="/employees", method= RequestMethod.GET)
-	public ResponseEntity<?> getAllEmployees(){
+
+	@RequestMapping(value = "/employees", method = RequestMethod.GET)
+	public ResponseEntity<?> getAllEmployees() {
 		try {
-			return new ResponseEntity<List<User>>(userRepo.findByRole("ROLE_EMPLOYEE"),HttpStatus.OK);
+			return new ResponseEntity<List<User>>(userRepo.findByRole("ROLE_EMPLOYEE"), HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO: handle exception
 			return new ResponseEntity<Exception>(e, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -58,8 +58,8 @@ public class UserController {
 	public ResponseEntity<?> addEmployee(@RequestBody User employee) {
 		try {
 			if (userRepo.findByUsername(employee.getUsername()) != null && employee.getId() == MAX) {
-				
-				//throw new Exception("Username has existed");
+
+				// throw new Exception("Username has existed");
 				return new ResponseEntity<Exception>(new Exception("Username has existed"), HttpStatus.NOT_FOUND);
 			}
 
@@ -71,9 +71,9 @@ public class UserController {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
-	@RequestMapping(value="/users/{id}", method= RequestMethod.DELETE)
-	public ResponseEntity<?> deleteApartment(@PathVariable Long id){
+
+	@RequestMapping(value = "/users/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<?> deleteApartment(@PathVariable Long id) {
 		try {
 			userRepo.delete(id);
 			return new ResponseEntity(HttpStatus.OK);

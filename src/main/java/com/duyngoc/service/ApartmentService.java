@@ -91,7 +91,7 @@ public class ApartmentService {
 	}
 
 	public String formatGarage(String garage) {
-		if (garage.equals("Yes")) {
+		if (garage.equals("yes")) {
 			return "garage";
 		}
 		return "no";

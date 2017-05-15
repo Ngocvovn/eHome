@@ -21,5 +21,5 @@ https://ehomemetro.herokuapp.com
 ```
 API documentation
 ```
-https://ehomemetro.herokuapp.com/swagger.ui.html
+https://ehomemetro.herokuapp.com/swagger-ui.html
 ```

@@ -60,7 +60,7 @@ public class SearchController {
 	@RequestMapping(value ="/greeting",method = RequestMethod.GET)
 	public ResponseEntity<?> greetCustomer(){
 		try {
-			return new ResponseEntity<String>("Hello everybody", HttpStatus.OK);
+			return new ResponseEntity<String>("Hello everybody from Finland", HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<Exception>(e, HttpStatus.BAD_GATEWAY);
 		}

@@ -2,13 +2,17 @@ language: java
 jdk: oraclejdk8
 sudo: false
 install: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-script: mvn clean test -B
-deploy:
-  provider: heroku
-  api_key:
-    secure: QukUxEcPUmhZj0OFrQAOMzdo/+/RNyl+j2rVDJr3WgcqU/csYKM7/LAzVhkMBHTiUnzRxWdXdChEBF+yJ1LG45zpfUK+N1qRxdJw0NMBRBkf3E7yboFSVWYbkzv2a+i+nERLfnx6TYGiPPko6NOD4LVNyR54M1y/JryW6LV7scaKMbbgkbWCS0mb8TC4Gv8C4LZ1UjZv7YaKDrk7H4+SdElMaIHgpYAHwzhJc+Kp5jhe+jNy86H9FgFwV4AQw0MvTuscGUvSfc51rapCp+SVytKr08m9MSE7qFNtrwW/U2ih+lnFKdXKybS1fRv7rgvD24a0s6WSTKMYejU0SSzeKkqgyq8ryfFgO4dvckZl5JmoH/vVAOzdq07zqTmU32dkCFoCmyXmcSe3WeHpwR07+fGCZDUFRecjlXdkY4d+1UPdEGK5ApxAcWNPVyguNCpvzh7lLC3CluO6HhGWLNpqFpzjMPWusqPDy/DEEC6GhAbL8zl7N9iFRpLqOX7aawUf9mJqBZBbOEZWYFzI7WgDDHsClEAWL+VJhEpfrJRKM8FFasloVGAVBDUGrlRmzcfylRUi+JtKMTs8bUZlTUF0Qxt63XHcc0drzCmioyPF7iXV8FN8txA1ZhvUiEnlLfiNDOC4C8vImORYl26/VYtg8jx53z3iJTytT+RtR3S7VwU=
-  app:
-    master: ehomemetro
-    develop: ehomedevbranch
-  on:
-    repo: Ngocvovn/eHome
+script:
+- eval $(aws ecr get-login --region eu-west-1)
+- docker-compose build
+- docker tag org/web:latest 123456789000.dkr.ecr.eu-west-1.amazonaws.com/org/web:latest
+- docker push 123456789000.dkr.ecr.eu-west-1.amazonaws.com/org/web:latest
+services:
+- docker
+before_install:
+- pip install --user awscli
+- export PATH=$PATH:$HOME/.local/bin
+env:
+  global:
+  - secure: ZoBEkkzakecLqi4TEeHWcSHhiG1XnYeN8m9RObIPO0GK94sQu/5189dPM/85CN1B9ugMZQyvatbNX85isf7sk9VxEP5iiwincH5qAPWANnHCvWl8vx+d+KFYZl7PmbrmCqCIbAfcjYXMPLTpg1ppNC1nKeuHCUsxjUXDKAWfGyXpO1U7RMhIqZUSipa3vjMdroR/jW5GS0irucpbhbYMlEYEbdDnM/eS37IYybutKvEBqptLKOVBL8inHA0FO858sWadoGmzjoBDdEV+o5g6hPe0t2WVfacf7gbbRGJdM0qvHE4P8TbJ6YPgo0AcZM0Ncr9PX+WjSBQ7AUSSuD6T3SCtDb+gpMUcU/OUG5YzYKizIn1+cAuJyEZrItQMt0OwEW/pBUHuGRg3GaLXdflReXIaaBLd/GC9aIvkcXeVkcGucq9tcwfr30ENvY7p2E29YDUgC9z3m+KaS026Pn3o8dLdU2ji5gSu8VI6RbXbd0y4jigO5DYGxMp9VpzboFIGNg9z8RIykxaWExuyImVj6bq+JRu+wehmg7ZhfODnq7VaC6VHYEIsBsOYtg2fsVXkgk46q2sIURFKTHvmVuTM4dPGu8XbqJPFRy7m5m6Q5Z66oLR4hOEqx6QmF3KnzpXLowQkPjsSpdu7QRFwhPSiSeufWhoH+RkxKjo+0RETDzY=
+  - secure: E2HlJPiteL4klur6Wk1BUgVNZ7A3thiB1iJjDhdA/jq83/FDghukA/r0XLjhsmIu95OW0TjEVSL1ygtrLWFwwwTXi3QGuM4wUb8ovEZ+UomR026usw2Ofi/hOe0Q0Jdtw6969nBJ0gaXGpjIwqfLAQnqzCccfRUd2OH5ExVafteRnvCdy/9PaoPx3NEspCGc8WHt8dehiuP6R5lp2m7tLw0fzg4Zh2/WeMNu7HQP+CR0MuXAXXVfZEYURkLnwZLN0v9ZVhF2wICKC6nC24g2ocedFW85NpErtojpPHIKTElai1zS5JhBR7Gpm/caU7CTI1FBIB65Z5JJkH5WRdsdO8f09xjm8YB7Apj+eZw7KIBbi2Da30ursd3R4MH2YlS8TwKXjAJzAqJXnHZVBRZ1QeGP4CpAOUN28xeGP5GkA5zWeV3iUP19W6PCCAWY2XrAVX/VEzkg6nyzwCa3dMqq8UCYAXUco43S4sLTxSkvwiWmIrte4fHsj4tua6iUWOBYP0yyANJGw+2fwI/5at27iGemfKe/DHBiYhshP7B/iiaozccNbAMwticqXYHyJwwHYNfy/Qq0eBrgoCXKaIepCKa+gNRAmFf4UQyD9uMKhI4kSh7EEb4J13zbGsbI4dUdUl0OmBUq6TKR6Gugz1+LcIQx9hbZ3VNDLH3aBkz2cQs=

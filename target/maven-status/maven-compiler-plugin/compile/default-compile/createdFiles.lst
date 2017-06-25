@@ -6,6 +6,7 @@ com\duyngoc\controller\RegisterController.class
 com\duyngoc\controller\ApartmentController.class
 com\duyngoc\controller\LoginController.class
 com\duyngoc\repository\UserRepository.class
+com\duyngoc\controller\HomeController.class
 com\duyngoc\model\ImageUrl.class
 com\duyngoc\BlackJackApplication.class
 com\duyngoc\controller\SearchController.class

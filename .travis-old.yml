@@ -1,0 +1,14 @@
+language: java
+jdk: oraclejdk8
+sudo: false
+install: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+script: mvn clean test -B
+deploy:
+  provider: heroku
+  api_key:
+    secure: QukUxEcPUmhZj0OFrQAOMzdo/+/RNyl+j2rVDJr3WgcqU/csYKM7/LAzVhkMBHTiUnzRxWdXdChEBF+yJ1LG45zpfUK+N1qRxdJw0NMBRBkf3E7yboFSVWYbkzv2a+i+nERLfnx6TYGiPPko6NOD4LVNyR54M1y/JryW6LV7scaKMbbgkbWCS0mb8TC4Gv8C4LZ1UjZv7YaKDrk7H4+SdElMaIHgpYAHwzhJc+Kp5jhe+jNy86H9FgFwV4AQw0MvTuscGUvSfc51rapCp+SVytKr08m9MSE7qFNtrwW/U2ih+lnFKdXKybS1fRv7rgvD24a0s6WSTKMYejU0SSzeKkqgyq8ryfFgO4dvckZl5JmoH/vVAOzdq07zqTmU32dkCFoCmyXmcSe3WeHpwR07+fGCZDUFRecjlXdkY4d+1UPdEGK5ApxAcWNPVyguNCpvzh7lLC3CluO6HhGWLNpqFpzjMPWusqPDy/DEEC6GhAbL8zl7N9iFRpLqOX7aawUf9mJqBZBbOEZWYFzI7WgDDHsClEAWL+VJhEpfrJRKM8FFasloVGAVBDUGrlRmzcfylRUi+JtKMTs8bUZlTUF0Qxt63XHcc0drzCmioyPF7iXV8FN8txA1ZhvUiEnlLfiNDOC4C8vImORYl26/VYtg8jx53z3iJTytT+RtR3S7VwU=
+  app:
+    master: ehomemetro
+    develop: ehomedevbranch
+  on:
+    repo: Ngocvovn/eHome

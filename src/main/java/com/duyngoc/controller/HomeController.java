@@ -10,9 +10,5 @@ public class HomeController {
 	public String home() {
 		return "index";
 	}
-	
-	@RequestMapping(value = "/greeting")
-	public String greet() {
-		return "hello everyone";
-	}
+
 }

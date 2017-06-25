@@ -5,8 +5,8 @@ install: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 script:
 - eval $(aws ecr get-login --region eu-west-1)
 - docker-compose build
-- docker tag org/web:latest 123456789000.dkr.ecr.eu-west-1.amazonaws.com/org/web:latest
-- docker push 123456789000.dkr.ecr.eu-west-1.amazonaws.com/org/web:latest
+- docker tag org/web:latest 883793968399.dkr.ecr.eu-central-1.amazonaws.com/org/web:latest
+- docker push 883793968399.dkr.ecr.eu-central-1.amazonaws.com/org/web:latest
 services:
 - docker
 before_install:

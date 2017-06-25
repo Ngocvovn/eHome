@@ -3,7 +3,7 @@ jdk: oraclejdk8
 sudo: false
 install: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 script:
-- eval $(aws ecr get-login --region eu-west-1)
+- eval $(aws ecr get-login --region eu-central-1)
 - docker-compose build
 - docker tag org/web:latest 883793968399.dkr.ecr.eu-central-1.amazonaws.com/org/web:latest
 - docker push 883793968399.dkr.ecr.eu-central-1.amazonaws.com/org/web:latest

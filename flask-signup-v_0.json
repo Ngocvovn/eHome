@@ -1,0 +1,21 @@
+{
+    "volumes": [],
+    "taskDefinitionArn": "arn:aws:ecs:eu-central-1:883793968399:task-definition/test-sample:1",
+    "containerDefinitions": [
+        {
+            "name": "flask-signup",
+            "image": "883793968399.dkr.ecr.eu-central-1.amazonaws.com/senzoit/senzolive3:latest",
+            "cpu": 10,
+            "portMappings": [
+                {
+                    "containerPort": 5000,
+                    "hostPort": 80
+                }
+            ],
+            "memory": 256,
+            "essential": true
+        }
+    ],
+    "family": "flask-signup",
+    "revision": 1
+}

@@ -1,12 +1,11 @@
 language: java
 jdk: oraclejdk8
-sudo: false
+sudo: required
 install: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 script:
 - eval $(aws ecr get-login --region eu-central-1)
 - mvn clean package docker:build
 - docker tag senzoit/senzolive3:latest 883793968399.dkr.ecr.eu-central-1.amazonaws.com/senzoit/senzolive3:latest
-- docker push 883793968399.dkr.ecr.eu-central-1.amazonaws.com/senzoit/senzolive3:latest
 services:
 - docker
 before_install:

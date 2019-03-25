@@ -1,23 +1,21 @@
 language: java
 jdk: oraclejdk8
-language: java
-jdk: oraclejdk8
 sudo: required
 install: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 script:
-- mvn clean package
+  - mvn clean package
 after_success:
-- sudo docker build -t test:$TRAVIS_BUILD_NUMBER .
-- eval $(aws ecr get-login --region eu-central-1)
-- chmod +x scripts/deploy.sh
-- scripts/deploy.sh
+  - sudo docker build -t test:$TRAVIS_BUILD_NUMBER .
+  - eval $(aws ecr get-login --region eu-central-1)
+  - chmod +x scripts/deploy.sh
+  - scripts/deploy.sh
 services:
-- docker
+  - docker
 before_install:
-- pip install --user awscli
-- pip install --upgrade --user awsebcli
-- export PATH=$PATH:$HOME/.local/bin
+  - pip install --user awscli
+  - pip install --upgrade --user awsebcli
+  - export PATH=$PATH:$HOME/.local/bin
 env:
   global:
-  - secure: mjISGru0Z836T/sMv7qQBLQooeFIwB6LT795x1741kSNKiO+BGax/I/mqF4qwXfWSWFYLXMeJ365s6EDbzqhQF1EktRYVjIhSswkhi8IkOD1yfnyouPCo910yiEW/pje4am8Zq/4BCYX7rgzMJEcd6meJoA4UgNvBjMXGtWtnclUB7w9DjZyk/ks6D5XXaHFBGPGjrNMgR+zwdcxlPBVmz8q5x/6qKdxm6+eHb6kItd1HimikGPnCuhH61eDk8tzWf5DV6QPn5pH33U4pvs3U4ti3Pmbz+ZKc29cJrLalUmZ4HbHxIYw0JUbimCrNMKdYjIvFhIeD0qMbuneSKzZACIsQ2oCKjs/Rzq60W5XT//ZhAO24279H9Pf5Ki096VDNtlidcDTIbQtq8gv7ZhXRKfH7IsaZtz5Wqit0JCInXVKKerxxaNwIjU8gVgniwFfUtGLYqR58bld2VKvPNxq33ySP6A2ALQ5MYIFEqjpM3tSVxx5EzGuI/EPzvXgDwuR1qdBpxFCy3TJGzZaCV4dcuxQnpvqLKo7qRjZtIl2mTbyBhiH8LHHj6D5rhr/Op8o++Lj3H2tkbPsy9F2kLrFG2UQ1v0aNPw8DOjUcv/jQ3Txl+/IuiAio9CYFGw5EptHYXLItQkfpZ2ADByZlSbCvWV0iliAYElzbfGiqHZMg4Q=
-  - secure: zM8NG1d+MsLAj65ZPlUmXnjwDqNDm38eoffI6fl4QVO+OOeN+IVh9nNcXxDA1dVGV80Q2AdvgkPq/cILh5UymQElMqP94+4ZYeSeyTVQSQ6fiCUSK76sLFu7W0Ap72P/rvTmkDXyXuvEPve3AND3pZkjrekibfRyDGAYZSwvzjh6YPoo6KylmzTAA3/Lwh6eWc2Ax5NrO0fHtXf8FLRBy2PoZG7Rs07O7q9Vi3HPDqRC8ChomMWCy+ad2t1CcGZgG5FsO/sK/KkU56ndz+DkdGxwdkQ3WuQKv0NjXJNpuZjIlvbHZvyvXR8hNEn5fdiTw+c3I5jIRyAAHQCV1zcKrP1Pk7sH1gRfwehE3KLpQRdnyjF4IZmRjXJmWN569nVplVcrWkzBtmQxuPwA98Z1EHvU+ajT1ii1vb3CWWkQL4jBbTCINrub7+IQxVrJCxGr0J+TOBH//e3vEIKEsoIBQnqJy8HoaGPpn1pFXlMAc/ZTEnbRMfGsInOLYmEgFHJ6yFSgL/VtIWwjv7Bg63TCSzmSVGaZpjmTrv0xiay+9H5FRBCjc7TcDu4YDSFt7+fZdLjQQUGBn01gqs0ksQBPt+Zz74+NV2khfnSKSFwEyo0nTalLxwCc1IKgjsxvWk6KSY3RksmR4fqrfQF0YU09hs8ZtLGlF2zi6ge8F9hXpfM=
+    - secure: tHMj9/MKYyMSfwMS+qgsMpvexhptiZ7b/MuqC1wLfFnlnjJQ4c/OLjqvU1bccsE+TjIg8tbL1TqqGBJlhkwoTxSdG3wxQgRMF+9Kdtl5TJXN3WgA5aZvrJT8+R+TTyQ5HY/652oFRMFDIjLSMvkRADcGA740KcBEL0B17vCB0Rq8C/8AXFiJrHLYSSXBzkgBwaB/gvnS7ltq3fzmuG1oPHMymUdgS6vpniApzKDVUUhHXdmRSEnvHvtqFW8SeqxZRe389dbWwdAhiwJALeKz/9fDzyn6Q/ZmSZTa+fEMHO1NYdUrEeApchTA8iKDUnFxL+Gw9JwPhDdUdmgknxXKPG1EMVd4BmWX+sImra69sR6p2RXuwZaJpTNAUUBbt/T4lvLcZ8viaczLp2v9VA3UbgWirSLVxw0fQO4qeRdb/D3W7ALOK89fm8aujxiuynD8j5gS2zgAF7nPfg3mUfD2h0bflRkUA4o3i8lpXWOpVm1HETZ8d9S2u1If7xW2T+Bh5HJD9j6TRYGGEr1+G9UrhrygT3E0zyYtwF+RtdOjoqOLeBqRMeGsbAwKrO4UHLbrjYBJK7eGPnjb4fCidsUHb5IrexRDOqpzEjcsgfR/tZM3D/gcz8aMxD8UpCciAZICAViT8LEeK+hKKfgQO+92vD8QHpA/YXAb71a65Lzf/cs=
+    - secure: d749PEopelObOFgSz7CduJptZHB+Iuy16K9TzCt15wYHqP0ynK4tIAQxwELKmb7bi86oard6rlZxpQ6Q4alzvrE0Hvp0IAWFkJpy3IIq3p3aYvSBNKdgn2gU2qRIKoQBo4JFy6rJckItDeO7NO7lYo/mIHuOvqQHLQXbQaj61cXVJnvx5DZWjwV4XcJjoUlCQTU9++zQGl6R9YtlKKJrhSD05//1oIAe5TApOOO7z0ESm/9vHFahHgMW/vSBkkmnhIxIHw4T/PVtxYK1Lq1CSYXwdJCyE/9mAHC7QLEg7RKhJuGJS8bbWB5BlOYm3JPc5LgJfoiaE26uG65uQj+oJHVVwOK6xlalkOH1r6rwOCV2VP/W12EcRMOayVk+ewxKtBxsyY/b2T560+jXjYAPASyydtqxXOJKOTiYrfKdgNQZH+FSp/pkSOqqFaHmxrsYXdcCEpGBuz4K5mtLNRa/j9qnStnBFZRoOxsYR6eLOHktGBo0KbsExTpOkrKFwQa+leHW3kOXKCBaxcOc90CF8s+NpNF8kIt0XQskFgeNyhjr+LQRm3BKHE1PuFXM4IlYZ6Y/sNXPSkWtpM8INdBEi8M0LIbuMu+O7fqCd3lxJCgibFSsjsp0eTE/KCSeefIJZkVRi9CTpC90mfCcEmJBjzqlWIQ+2khUci2om5zZY4U=

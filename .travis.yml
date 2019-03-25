@@ -12,8 +12,6 @@ after_success:
 services:
   - docker
 before_install:
-  - pyenv install --list
-  - pyenv install 3.6
   - pyenv global 3.6
   - pip3 install awscli --upgrade --user
   - pip3 install awsebcli --upgrade --user

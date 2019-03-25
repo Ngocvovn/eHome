@@ -6,7 +6,7 @@ script:
   - mvn clean package
 after_success:
   - sudo docker build -t test:$TRAVIS_BUILD_NUMBER .
-  - eval $(aws ecr get-login --region eu-north-1)
+  - eval $(aws ecr get-login --no-include-email --region eu-north-1 | sed 's|https://||')
   - chmod +x scripts/deploy.sh
   - scripts/deploy.sh
 services:

@@ -12,6 +12,7 @@ after_success:
 services:
   - docker
 before_install:
+  - sudo apt-get install python3
   - pip3 install --user awscli
   - pip3 install --upgrade --user awsebcli
   - export PATH=$PATH:$HOME/.local/bin

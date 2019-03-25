@@ -1,4 +1,4 @@
-FROM frolvlad/alpine-oraclejdk8:slim
+FROM openjdk:8-jdk-alpine
 VOLUME /tmp
 EXPOSE 80
 ADD target/BlackJack-0.0.1-SNAPSHOT.jar app.jar
